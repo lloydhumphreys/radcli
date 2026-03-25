@@ -6,6 +6,8 @@ This is the current supported command surface for `radcli`.
 
 ```bash
 ./bin/rad help
+./bin/rad version [--json]
+./bin/rad self-update [--check] [--version <tag>] [--repo <owner/repo>]
 ```
 
 ## Auth

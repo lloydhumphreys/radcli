@@ -1,0 +1,56 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      RADCLI_REPO_OWNER: ${{ github.repository_owner }}
+      RADCLI_REPO_NAME: ${{ github.event.repository.name }}
+      RADCLI_HOMEBREW_TAP_OWNER: ${{ vars.RADCLI_HOMEBREW_TAP_OWNER }}
+      RADCLI_HOMEBREW_TAP_NAME: ${{ vars.RADCLI_HOMEBREW_TAP_NAME }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+
+      - name: Select GitHub token
+        shell: bash
+        run: |
+          if [ -n "${{ secrets.HOMEBREW_TAP_GITHUB_TOKEN }}" ]; then
+            echo "GORELEASER_GITHUB_TOKEN=${{ secrets.HOMEBREW_TAP_GITHUB_TOKEN }}" >> "$GITHUB_ENV"
+            echo "HOMEBREW_GITHUB_API_TOKEN=${{ secrets.HOMEBREW_TAP_GITHUB_TOKEN }}" >> "$GITHUB_ENV"
+          else
+            echo "GORELEASER_GITHUB_TOKEN=${{ github.token }}" >> "$GITHUB_ENV"
+            echo "HOMEBREW_GITHUB_API_TOKEN=" >> "$GITHUB_ENV"
+          fi
+
+      - name: Set up GoReleaser
+        uses: goreleaser/goreleaser-action@v6
+        with:
+          version: latest
+          install-only: true
+
+      - name: Release
+        uses: goreleaser/goreleaser-action@v6
+        with:
+          version: latest
+          args: release --clean
+        env:
+          GITHUB_TOKEN: ${{ env.GORELEASER_GITHUB_TOKEN }}
+          HOMEBREW_GITHUB_API_TOKEN: ${{ env.HOMEBREW_GITHUB_API_TOKEN }}

@@ -15,6 +15,7 @@ This folder is the start of the public-facing docs for `radcli`.
 - [ads.md](./ads.md): ad list, get, create, and update
 - [profiles.md](./profiles.md): profile lookup helpers
 - [posts.md](./posts.md): post/creative list, get, create, and update
+- [distribution.md](./distribution.md): release, Homebrew, and self-update
 - [login.md](./login.md): Reddit Ads authentication flow
 - [resources.md](./resources.md): campaigns, ad groups, and ads
 - [reports.md](./reports.md): report commands, presets, fields, and output formats
@@ -35,6 +36,7 @@ This folder is the start of the public-facing docs for `radcli`.
 - creating and updating ads
 - managing profiles and posts/creatives
 - running raw reports
+- distributing and updating the CLI
 - running enriched summary reports
 - filtering summary reports by campaign, ad group, and ad
 - exporting report output as JSON or CSV

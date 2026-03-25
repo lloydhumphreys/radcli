@@ -7,6 +7,7 @@ having to live in the website.
 
 Today `radcli` is already useful for:
 
+- showing release metadata and self-updating from GitHub Releases
 - authenticating with Reddit Ads
 - selecting a default business and ad account
 - listing and inspecting campaigns, ad groups, and ads
@@ -30,6 +31,29 @@ for repeated operator tasks. `radcli` is meant to be a daily-driver tool for:
 ```bash
 cd /Users/lloyd/Code/radcli
 env GOCACHE=$PWD/.gocache go build -o bin/rad ./cmd/rad
+```
+
+## Install And Update
+
+Release/distribution scaffolding is included for:
+
+- GitHub Releases
+- Homebrew tap publishing
+- `rad self-update`
+
+Local examples:
+
+```bash
+./bin/rad version
+./bin/rad self-update --check
+```
+
+Once releases are live, the intended Homebrew flow is:
+
+```bash
+brew tap OWNER/TAP_REPO
+brew install --cask radcli
+brew upgrade --cask radcli
 ```
 
 ## Quick Start
@@ -85,6 +109,7 @@ The deeper docs live in [`docs/`](./docs):
 
 - [`docs/index.md`](./docs/index.md)
 - [`docs/commands.md`](./docs/commands.md)
+- [`docs/distribution.md`](./docs/distribution.md)
 - [`docs/login.md`](./docs/login.md)
 - [`docs/resources.md`](./docs/resources.md)
 - [`docs/reports.md`](./docs/reports.md)
@@ -98,16 +123,24 @@ Implemented command groups:
 - `config`
 - `business`
 - `account`
+- `funding`
+- `pixel`
+- `audience`
+- `profile`
+- `post`
 - `campaign`
 - `adgroup`
 - `ad`
+- `targeting`
 - `report`
+- `version`
+- `self-update`
 
 ## Next
 
-The next major milestone is the write path:
+The next major milestone is workflow polish:
 
-- campaign create/update
-- ad group create/update
-- dry-run support for write commands
-- more operator-friendly report and targeting workflows
+- better validation and error messages around write commands
+- more end-to-end workflow docs and examples
+- richer export and automation ergonomics
+- wider live testing against real Reddit Ads setups

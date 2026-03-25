@@ -15,6 +15,7 @@ import (
 	"radcli/internal/config"
 	"radcli/internal/output"
 	"radcli/internal/reddit"
+	"radcli/internal/releaseinfo"
 )
 
 type App struct {
@@ -24,9 +25,10 @@ type App struct {
 	store       *config.Store
 	api         *reddit.Client
 	interactive bool
+	release     releaseinfo.Info
 }
 
-func New(stdin io.Reader, stdout, stderr io.Writer) (*App, error) {
+func New(stdin io.Reader, stdout, stderr io.Writer, release releaseinfo.Info) (*App, error) {
 	store, err := config.Load()
 	if err != nil {
 		return nil, err
@@ -46,6 +48,7 @@ func New(stdin io.Reader, stdout, stderr io.Writer) (*App, error) {
 		store:       store,
 		api:         reddit.New(store),
 		interactive: interactive,
+		release:     release,
 	}, nil
 }
 
@@ -59,6 +62,10 @@ func (a *App) Run(ctx context.Context, args []string) error {
 	case "help", "--help", "-h":
 		_, err := fmt.Fprintln(a.stdout, rootHelp)
 		return err
+	case "version":
+		return a.runVersion(args[1:])
+	case "self-update":
+		return a.runSelfUpdate(ctx, args[1:])
 	case "auth":
 		return a.runAuth(ctx, args[1:])
 	case "config":
@@ -625,6 +632,8 @@ func (s *stringList) Set(value string) error {
 const rootHelp = `radcli: Reddit Ads from the terminal
 
 Commands:
+  version   Show build and release information
+  self-update Update the installed binary from GitHub Releases
   auth      Configure and authenticate with Reddit Ads
   config    Show local configuration
   business  List and select businesses
@@ -641,6 +650,8 @@ Commands:
   report    Run reports
 
 Examples:
+  rad version
+  rad self-update --check
   rad auth setup --client-id <id> --client-secret <secret> --redirect-uri https://example.com/oauth/callback
   rad auth login
   rad auth complete --code <code>

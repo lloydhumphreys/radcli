@@ -130,7 +130,7 @@ func (a *App) runAdGroupCreateCommand(ctx context.Context, args []string) error 
 		return err
 	}
 	if !*jsonOut {
-		if _, err := fmt.Fprintln(a.stdout, "Ad group created.\n"); err != nil {
+		if _, err := fmt.Fprintln(a.stdout, "Ad group created."); err != nil {
 			return err
 		}
 	}

@@ -99,7 +99,7 @@ func (a *App) runAdCreateCommand(ctx context.Context, args []string) error {
 		return err
 	}
 	if !*jsonOut {
-		if _, err := fmt.Fprintln(a.stdout, "Ad created.\n"); err != nil {
+		if _, err := fmt.Fprintln(a.stdout, "Ad created."); err != nil {
 			return err
 		}
 	}

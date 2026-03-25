@@ -111,7 +111,7 @@ func (a *App) runCampaignCreateCommand(ctx context.Context, args []string) error
 		return err
 	}
 	if !*jsonOut {
-		if _, err := fmt.Fprintln(a.stdout, "Campaign created.\n"); err != nil {
+		if _, err := fmt.Fprintln(a.stdout, "Campaign created."); err != nil {
 			return err
 		}
 	}

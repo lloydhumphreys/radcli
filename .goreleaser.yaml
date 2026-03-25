@@ -1,0 +1,85 @@
+version: 2
+
+project_name: radcli
+
+before:
+  hooks:
+    - go test ./...
+
+builds:
+  - id: rad
+    main: ./cmd/rad
+    binary: rad
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - darwin
+      - linux
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    ldflags:
+      - -s -w
+      - -X main.version={{ .Version }}
+      - -X main.commit={{ .Commit }}
+      - -X main.date={{ .Date }}
+      - -X main.repoOwner={{ .Env.RADCLI_REPO_OWNER }}
+      - -X main.repoName={{ .Env.RADCLI_REPO_NAME }}
+
+archives:
+  - id: archive
+    ids:
+      - rad
+    formats:
+      - tar.gz
+    format_overrides:
+      - goos: windows
+        formats:
+          - zip
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+
+checksum:
+  name_template: "checksums.txt"
+
+snapshot:
+  version_template: "{{ incpatch .Version }}-next"
+
+release:
+  github:
+    owner: "{{ .Env.RADCLI_REPO_OWNER }}"
+    name: "{{ .Env.RADCLI_REPO_NAME }}"
+  draft: false
+  prerelease: auto
+
+changelog:
+  use: git
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+      - "^chore:"
+
+homebrew_casks:
+  - name: radcli
+    ids:
+      - archive
+    binaries:
+      - rad
+    directory: Casks
+    homepage: "https://github.com/{{ .Env.RADCLI_REPO_OWNER }}/{{ .Env.RADCLI_REPO_NAME }}"
+    description: "Reddit Ads from the terminal"
+    commit_msg_template: "Brew cask update for {{ .ProjectName }} {{ .Tag }}"
+    skip_upload: "{{ or (eq .Env.RADCLI_HOMEBREW_TAP_OWNER \"\") (eq .Env.RADCLI_HOMEBREW_TAP_NAME \"\") }}"
+    repository:
+      owner: "{{ .Env.RADCLI_HOMEBREW_TAP_OWNER }}"
+      name: "{{ .Env.RADCLI_HOMEBREW_TAP_NAME }}"
+      branch: main
+      token: "{{ .Env.HOMEBREW_GITHUB_API_TOKEN }}"
+    hooks:
+      post:
+        install: |
+          if OS.mac?
+            system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{staged_path}/rad"]
+          end

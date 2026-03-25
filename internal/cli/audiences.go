@@ -102,7 +102,7 @@ func (a *App) runSavedAudienceCreateCommand(ctx context.Context, args []string) 
 		return err
 	}
 	if !*jsonOut {
-		if _, err := fmt.Fprintln(a.stdout, "Saved audience created.\n"); err != nil {
+		if _, err := fmt.Fprintln(a.stdout, "Saved audience created."); err != nil {
 			return err
 		}
 	}

@@ -154,7 +154,7 @@ func (a *App) runPostCreateCommand(ctx context.Context, args []string) error {
 		return err
 	}
 	if !*jsonOut {
-		if _, err := fmt.Fprintln(a.stdout, "Post created.\n"); err != nil {
+		if _, err := fmt.Fprintln(a.stdout, "Post created."); err != nil {
 			return err
 		}
 	}
