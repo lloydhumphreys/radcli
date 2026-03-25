@@ -1,0 +1,6 @@
+.build
+.build-scratch
+.swiftpm
+DerivedData
+bin
+.gocache
