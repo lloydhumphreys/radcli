@@ -89,6 +89,8 @@ This is the current supported command surface for `radcli`.
 ```bash
 ./bin/rad ad list [--account-id <id-or-name>] [--all] [--page-size N] [--json]
 ./bin/rad ad get <id-or-name> [--account-id <id-or-name>] [--json]
+./bin/rad ad create --ad-group <id-or-name> --name <name> --configured-status <status> [--post-id <id>] [--click-url <url>] [--click-url-query-parameter <name=value> ...] [--shopping-creative-json <json-or-@file>] [--account-id <id-or-name>] [--dry-run]
+./bin/rad ad update <id-or-name> [--ad-group <id-or-name>] [--name <name>] [--configured-status <status>] [--post-id <id>] [--click-url <url>] [--click-url-query-parameter <name=value> ...] [--shopping-creative-json <json-or-@file>] [--account-id <id-or-name>] [--dry-run]
 ```
 
 ## Targeting
@@ -153,6 +155,7 @@ Common patterns:
 ./bin/rad pixel list
 ./bin/rad audience saved list
 ./bin/rad campaign list
+./bin/rad ad create --ad-group "US Retargeting" --name "Spring Ad" --configured-status PAUSED --dry-run
 ./bin/rad campaign get <campaign-name>
 ./bin/rad campaign create --name "Spring Launch" --objective CLICKS --configured-status PAUSED --dry-run
 ./bin/rad campaign update "Spring Launch" --configured-status ACTIVE

@@ -78,13 +78,7 @@ func (a *App) Run(ctx context.Context, args []string) error {
 	case "adgroup":
 		return a.runAdGroupCommand(ctx, args[1:])
 	case "ad":
-		return a.runAssetCommand(ctx, assetDefinition{
-			Command:            "ad",
-			Label:              "ad",
-			CollectionEndpoint: "ads",
-			ItemEndpoint:       "ads",
-			ListColumns:        []string{"id", "name", "campaign_id", "ad_group_id", "configured_status", "effective_status"},
-		}, args[1:])
+		return a.runAdCommand(ctx, args[1:])
 	case "targeting":
 		return a.runTargetingCommand(ctx, args[1:])
 	case "report":
@@ -652,6 +646,7 @@ Examples:
   rad pixel list
   rad audience saved list
   rad campaign list
+  rad ad create --ad-group <ad-group> --name <name> --configured-status PAUSED --dry-run
   rad campaign get <id-or-name>
   rad campaign create --name <name> --objective <objective> --configured-status PAUSED
   rad campaign update <id-or-name> --name <name>
