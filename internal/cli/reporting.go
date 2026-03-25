@@ -77,7 +77,7 @@ func (a *App) runReportFields(ctx context.Context, args []string) error {
 	fs := newFlagSet("report fields")
 	match := fs.String("match", "", "")
 	jsonOut := fs.Bool("json", false, "")
-	if err := fs.Parse(args); err != nil {
+	if err := parseFlags(fs, args); err != nil {
 		return err
 	}
 
@@ -123,7 +123,7 @@ func (a *App) runRawReport(ctx context.Context, args []string) error {
 	var breakdowns stringList
 	fs.Var(&fields, "field", "")
 	fs.Var(&breakdowns, "breakdown", "")
-	if err := fs.Parse(args); err != nil {
+	if err := parseFlags(fs, args); err != nil {
 		return err
 	}
 	if *jsonOut && *csvOut {
@@ -183,7 +183,7 @@ func (a *App) runPresetReport(ctx context.Context, preset reportPreset, args []s
 	adID := fs.String("ad-id", "", "")
 	var extraFields stringList
 	fs.Var(&extraFields, "field", "")
-	if err := fs.Parse(args); err != nil {
+	if err := parseFlags(fs, args); err != nil {
 		return err
 	}
 	if *jsonOut && *csvOut {

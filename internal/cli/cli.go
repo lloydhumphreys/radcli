@@ -68,13 +68,7 @@ func (a *App) Run(ctx context.Context, args []string) error {
 	case "account":
 		return a.runAccount(ctx, args[1:])
 	case "campaign":
-		return a.runAssetCommand(ctx, assetDefinition{
-			Command:            "campaign",
-			Label:              "campaign",
-			CollectionEndpoint: "campaigns",
-			ItemEndpoint:       "campaigns",
-			ListColumns:        []string{"id", "name", "configured_status", "effective_status", "objective", "budget_amount"},
-		}, args[1:])
+		return a.runCampaignCommand(ctx, args[1:])
 	case "adgroup":
 		return a.runAssetCommand(ctx, assetDefinition{
 			Command:            "adgroup",
@@ -123,7 +117,7 @@ func (a *App) runAuth(ctx context.Context, args []string) error {
 		userAgent := fs.String("user-agent", "macos:com.lloyd.radcli:v0.1.0 (by /u/unknown)", "")
 		var scopes stringList
 		fs.Var(&scopes, "scope", "")
-		if err := fs.Parse(args[1:]); err != nil {
+		if err := parseFlags(fs, args[1:]); err != nil {
 			return err
 		}
 		if *clientID == "" || *clientSecret == "" || *redirectURI == "" {
@@ -148,7 +142,7 @@ func (a *App) runAuth(ctx context.Context, args []string) error {
 		fs := newFlagSet("auth login")
 		openBrowser := fs.Bool("open", false, "")
 		noWait := fs.Bool("no-wait", false, "")
-		if err := fs.Parse(args[1:]); err != nil {
+		if err := parseFlags(fs, args[1:]); err != nil {
 			return err
 		}
 		rawURL, expectedState, err := a.api.BuildAuthorizationURL()
@@ -172,7 +166,7 @@ func (a *App) runAuth(ctx context.Context, args []string) error {
 		fs := newFlagSet("auth complete")
 		code := fs.String("code", "", "")
 		state := fs.String("state", "", "")
-		if err := fs.Parse(args[1:]); err != nil {
+		if err := parseFlags(fs, args[1:]); err != nil {
 			return err
 		}
 		if *code == "" {
@@ -189,7 +183,7 @@ func (a *App) runAuth(ctx context.Context, args []string) error {
 	case "whoami":
 		fs := newFlagSet("auth whoami")
 		jsonOut := fs.Bool("json", false, "")
-		if err := fs.Parse(args[1:]); err != nil {
+		if err := parseFlags(fs, args[1:]); err != nil {
 			return err
 		}
 		payload, err := a.api.RequestJSON(ctx, "GET", "/me", nil, nil)
@@ -226,7 +220,7 @@ func (a *App) runBusiness(ctx context.Context, args []string) error {
 		all := fs.Bool("all", false, "")
 		pageSize := fs.Int("page-size", 0, "")
 		jsonOut := fs.Bool("json", false, "")
-		if err := fs.Parse(args[1:]); err != nil {
+		if err := parseFlags(fs, args[1:]); err != nil {
 			return err
 		}
 		query := url.Values{}
@@ -275,7 +269,7 @@ func (a *App) runAccount(ctx context.Context, args []string) error {
 		all := fs.Bool("all", false, "")
 		pageSize := fs.Int("page-size", 0, "")
 		jsonOut := fs.Bool("json", false, "")
-		if err := fs.Parse(args[1:]); err != nil {
+		if err := parseFlags(fs, args[1:]); err != nil {
 			return err
 		}
 		if *businessID == "" {
@@ -506,6 +500,59 @@ func newFlagSet(name string) *flag.FlagSet {
 	return fs
 }
 
+func parseFlags(fs *flag.FlagSet, args []string) error {
+	return fs.Parse(interspersedArgs(fs, args))
+}
+
+func interspersedArgs(fs *flag.FlagSet, args []string) []string {
+	flags := make([]string, 0, len(args))
+	positionals := make([]string, 0, len(args))
+
+	for index := 0; index < len(args); index++ {
+		arg := args[index]
+		switch {
+		case arg == "--":
+			positionals = append(positionals, args[index+1:]...)
+			index = len(args)
+		case arg == "-" || !strings.HasPrefix(arg, "-"):
+			positionals = append(positionals, arg)
+		default:
+			flags = append(flags, arg)
+			if flagConsumesValue(fs, arg) && index+1 < len(args) {
+				index++
+				flags = append(flags, args[index])
+			}
+		}
+	}
+
+	return append(flags, positionals...)
+}
+
+func flagConsumesValue(fs *flag.FlagSet, arg string) bool {
+	name := strings.TrimLeft(arg, "-")
+	if name == "" {
+		return false
+	}
+	if cut := strings.IndexByte(name, '='); cut >= 0 {
+		return false
+	}
+
+	defined := fs.Lookup(name)
+	if defined == nil {
+		return false
+	}
+
+	type boolFlag interface {
+		IsBoolFlag() bool
+	}
+
+	if v, ok := defined.Value.(boolFlag); ok && v.IsBoolFlag() {
+		return false
+	}
+
+	return true
+}
+
 func (a *App) finishInteractiveLogin(ctx context.Context, expectedState string) error {
 	if _, err := fmt.Fprintln(a.stdout, "\nPaste the full callback URL or just the code, then press Enter."); err != nil {
 		return err
@@ -597,6 +644,8 @@ Examples:
   rad account use <ad-account-id-or-name>
   rad campaign list
   rad campaign get <id-or-name>
+  rad campaign create --name <name> --objective <objective> --configured-status PAUSED
+  rad campaign update <id-or-name> --name <name>
   rad report campaign-summary --since 7d
   rad report run --from 2026-03-01T00:00:00Z --to 2026-03-08T00:00:00Z --field IMPRESSIONS --field CLICKS`
 

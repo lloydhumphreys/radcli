@@ -1,11 +1,12 @@
 # Resources
 
-`radcli` currently supports both `list` and `get` for the core Reddit Ads
-resources:
+`radcli` currently supports:
 
 - campaigns
 - ad groups
 - ads
+
+Campaigns now also support `create` and `update`.
 
 ## Name or ID
 
@@ -33,6 +34,8 @@ instead.
 ```bash
 ./bin/rad campaign list
 ./bin/rad campaign get <id-or-name>
+./bin/rad campaign create --name <name> --objective <objective> --configured-status <status>
+./bin/rad campaign update <id-or-name> [flags]
 ```
 
 Notes:
@@ -41,6 +44,7 @@ Notes:
 - you can override with `--account-id <id-or-name>`
 - `list` renders a compact table
 - `get` renders JSON for deeper inspection
+- `create` and `update` are documented in `docs/campaigns.md`
 
 ## Ad Groups
 

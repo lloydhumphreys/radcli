@@ -40,7 +40,7 @@ func (a *App) runAssetListCommand(ctx context.Context, def assetDefinition, args
 	all := fs.Bool("all", false, "")
 	pageSize := fs.Int("page-size", 0, "")
 	jsonOut := fs.Bool("json", false, "")
-	if err := fs.Parse(args); err != nil {
+	if err := parseFlags(fs, args); err != nil {
 		return err
 	}
 
@@ -68,7 +68,7 @@ func (a *App) runAssetGetCommand(ctx context.Context, def assetDefinition, args 
 	fs := newFlagSet(def.Command + " get")
 	accountInput := fs.String("account-id", "", "")
 	jsonOut := fs.Bool("json", false, "")
-	if err := fs.Parse(args); err != nil {
+	if err := parseFlags(fs, args); err != nil {
 		return err
 	}
 

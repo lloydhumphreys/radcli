@@ -43,6 +43,8 @@ This is the current supported command surface for `radcli`.
 ```bash
 ./bin/rad campaign list [--account-id <id-or-name>] [--all] [--page-size N] [--json]
 ./bin/rad campaign get <id-or-name> [--account-id <id-or-name>] [--json]
+./bin/rad campaign create --name <name> --objective <objective> --configured-status <status> [--account-id <id-or-name>] [--funding-instrument-id <id>] [--invoice-label <text>] [--special-ad-category <category>] [--campaign-budget-optimization <true|false>] [--goal-type <daily_spend|lifetime_spend>] [--goal-value <major-currency>] [--spend-cap <major-currency>] [--start-time <rfc3339>] [--end-time <rfc3339>] [--bid-strategy <bidless|maximize_volume|target_cpx>] [--bid-type <cpc|cpm|cpv6>] [--bid-value <major-currency>] [--app-id <id>] [--conversion-pixel-id <id>] [--view-through-conversion-type <type>] [--dry-run]
+./bin/rad campaign update <id-or-name> [--account-id <id-or-name>] [--name <name>] [--objective <objective>] [--configured-status <status>] [--funding-instrument-id <id>] [--invoice-label <text>] [--special-ad-category <category>] [--campaign-budget-optimization <true|false>] [--goal-type <daily_spend|lifetime_spend>] [--goal-value <major-currency>] [--spend-cap <major-currency>] [--start-time <rfc3339>] [--end-time <rfc3339>] [--bid-strategy <bidless|maximize_volume|target_cpx>] [--bid-type <cpc|cpm|cpv6>] [--bid-value <major-currency>] [--app-id <id>] [--conversion-pixel-id <id>] [--view-through-conversion-type <type>] [--dry-run]
 ```
 
 ## Ad Groups
@@ -105,6 +107,8 @@ Common patterns:
 ./bin/rad account use <account-name>
 ./bin/rad campaign list
 ./bin/rad campaign get <campaign-name>
+./bin/rad campaign create --name "Spring Launch" --objective CLICKS --configured-status PAUSED --dry-run
+./bin/rad campaign update "Spring Launch" --configured-status ACTIVE
 ./bin/rad report campaign-summary --since 30d
 ./bin/rad report campaign-summary --campaign <campaign-name>
 ./bin/rad report campaign-summary --since 30d --csv
