@@ -54,6 +54,18 @@ This is the current supported command surface for `radcli`.
 ./bin/rad pixel events <pixel-id-or-name> [--account-id <id-or-name>] [--json]
 ```
 
+## Audiences
+
+```bash
+./bin/rad audience saved list [--account-id <id-or-name>] [--all] [--page-size N] [--json]
+./bin/rad audience saved get <id-or-name> [--account-id <id-or-name>] [--json]
+./bin/rad audience saved create --name <name> --type <type> --targeting-json <json-or-@file> [--account-id <id-or-name>] [--dry-run]
+./bin/rad audience saved update <id-or-name> [--name <name>] [--type <type>] [--targeting-json <json-or-@file>] [--account-id <id-or-name>] [--dry-run]
+./bin/rad audience custom list [--account-id <id-or-name>] [--name <text>] [--all] [--page-size N] [--json]
+./bin/rad audience custom get <id-or-name> [--account-id <id-or-name>] [--json]
+./bin/rad audience third-party list [--all] [--page-size N] [--json]
+```
+
 ## Campaigns
 
 ```bash
@@ -139,6 +151,7 @@ Common patterns:
 ./bin/rad account use <account-name>
 ./bin/rad funding list
 ./bin/rad pixel list
+./bin/rad audience saved list
 ./bin/rad campaign list
 ./bin/rad campaign get <campaign-name>
 ./bin/rad campaign create --name "Spring Launch" --objective CLICKS --configured-status PAUSED --dry-run

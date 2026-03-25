@@ -71,6 +71,8 @@ func (a *App) Run(ctx context.Context, args []string) error {
 		return a.runFundingCommand(ctx, args[1:])
 	case "pixel":
 		return a.runPixelCommand(ctx, args[1:])
+	case "audience":
+		return a.runAudienceCommand(ctx, args[1:])
 	case "campaign":
 		return a.runCampaignCommand(ctx, args[1:])
 	case "adgroup":
@@ -631,6 +633,7 @@ Commands:
   account   List and select ad accounts
   funding   Look up funding instruments
   pixel     Look up pixels and event activity
+  audience  Work with saved and custom audiences
   campaign  List campaigns
   adgroup   List ad groups
   ad        List ads
@@ -647,6 +650,7 @@ Examples:
   rad account use <ad-account-id-or-name>
   rad funding list
   rad pixel list
+  rad audience saved list
   rad campaign list
   rad campaign get <id-or-name>
   rad campaign create --name <name> --objective <objective> --configured-status PAUSED
