@@ -38,6 +38,14 @@ This is the current supported command surface for `radcli`.
 ./bin/rad account use <ad-account-id-or-name>
 ```
 
+## Funding
+
+```bash
+./bin/rad funding list [--account-id <id-or-name>] [--search <text>] [--type <type> ...] [--funding-instrument-id <id> ...] [--start-time <rfc3339>] [--end-time <rfc3339>] [--mode <mode>] [--selectable <true|false>] [--all] [--page-size N] [--json]
+./bin/rad funding business-list [--business-id <id-or-name>] [--search <text>] [--funding-instrument-id <id> ...] [--mode <mode>] [--all] [--page-size N] [--json]
+./bin/rad funding allocations <funding-instrument-id-or-name> [--account-id <id-or-name>] [--all] [--page-size N] [--json]
+```
+
 ## Campaigns
 
 ```bash
@@ -121,6 +129,7 @@ Common patterns:
 ./bin/rad business use <business-name>
 ./bin/rad account list
 ./bin/rad account use <account-name>
+./bin/rad funding list
 ./bin/rad campaign list
 ./bin/rad campaign get <campaign-name>
 ./bin/rad campaign create --name "Spring Launch" --objective CLICKS --configured-status PAUSED --dry-run

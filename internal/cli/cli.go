@@ -67,6 +67,8 @@ func (a *App) Run(ctx context.Context, args []string) error {
 		return a.runBusiness(ctx, args[1:])
 	case "account":
 		return a.runAccount(ctx, args[1:])
+	case "funding":
+		return a.runFundingCommand(ctx, args[1:])
 	case "campaign":
 		return a.runCampaignCommand(ctx, args[1:])
 	case "adgroup":
@@ -625,6 +627,7 @@ Commands:
   config    Show local configuration
   business  List and select businesses
   account   List and select ad accounts
+  funding   Look up funding instruments
   campaign  List campaigns
   adgroup   List ad groups
   ad        List ads
@@ -639,6 +642,7 @@ Examples:
   rad business use <business-id-or-name>
   rad account list
   rad account use <ad-account-id-or-name>
+  rad funding list
   rad campaign list
   rad campaign get <id-or-name>
   rad campaign create --name <name> --objective <objective> --configured-status PAUSED
