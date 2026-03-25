@@ -8,6 +8,7 @@ This folder is the start of the public-facing docs for `radcli`.
 - [api-coverage.md](./api-coverage.md): API/docs coverage checklist
 - [campaigns.md](./campaigns.md): campaign list, get, create, and update
 - [adgroups.md](./adgroups.md): ad group list, get, create, and update
+- [targeting.md](./targeting.md): targeting lookup helpers
 - [login.md](./login.md): Reddit Ads authentication flow
 - [resources.md](./resources.md): campaigns, ad groups, and ads
 - [reports.md](./reports.md): report commands, presets, fields, and output formats
@@ -21,6 +22,7 @@ This folder is the start of the public-facing docs for `radcli`.
 - listing and inspecting campaigns, ad groups, and ads
 - creating and updating campaigns
 - creating and updating ad groups
+- looking up targeting entities
 - running raw reports
 - running enriched summary reports
 - filtering summary reports by campaign, ad group, and ad

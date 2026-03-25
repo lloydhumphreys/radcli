@@ -79,6 +79,8 @@ func (a *App) Run(ctx context.Context, args []string) error {
 			ItemEndpoint:       "ads",
 			ListColumns:        []string{"id", "name", "campaign_id", "ad_group_id", "configured_status", "effective_status"},
 		}, args[1:])
+	case "targeting":
+		return a.runTargetingCommand(ctx, args[1:])
 	case "report":
 		return a.runReportCommand(ctx, args[1:])
 	default:
@@ -626,6 +628,7 @@ Commands:
   campaign  List campaigns
   adgroup   List ad groups
   ad        List ads
+  targeting Look up targeting entities
   report    Run reports
 
 Examples:
@@ -641,6 +644,7 @@ Examples:
   rad campaign create --name <name> --objective <objective> --configured-status PAUSED
   rad campaign update <id-or-name> --name <name>
   rad adgroup create --campaign <campaign> --name <name> --configured-status PAUSED --dry-run
+  rad targeting communities search --query gaming
   rad report campaign-summary --since 7d
   rad report run --from 2026-03-01T00:00:00Z --to 2026-03-08T00:00:00Z --field IMPRESSIONS --field CLICKS`
 

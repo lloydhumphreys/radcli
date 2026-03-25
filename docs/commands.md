@@ -63,6 +63,20 @@ This is the current supported command surface for `radcli`.
 ./bin/rad ad get <id-or-name> [--account-id <id-or-name>] [--json]
 ```
 
+## Targeting
+
+```bash
+./bin/rad targeting communities search --query <text> [--all] [--page-size N] [--json]
+./bin/rad targeting communities list [--name <community> ...] [--all] [--page-size N] [--json]
+./bin/rad targeting communities suggest [--name <community> ...] [--website-url <url>] [--all] [--page-size N] [--json]
+./bin/rad targeting interests list [--json]
+./bin/rad targeting geolocations search [--postal-code <code>] [--city <name>] [--country <code>] [--json]
+./bin/rad targeting devices list [--all] [--page-size N] [--json]
+./bin/rad targeting carriers list [--all] [--page-size N] [--json]
+./bin/rad targeting keywords suggest --keyword <term> [--keyword <term> ...] [--json]
+./bin/rad targeting keywords validate --keyword <term> [--keyword <term> ...] [--json]
+```
+
 ## Reports
 
 ```bash
@@ -113,6 +127,8 @@ Common patterns:
 ./bin/rad campaign update "Spring Launch" --configured-status ACTIVE
 ./bin/rad adgroup create --campaign "Spring Launch" --name "US Retargeting" --configured-status PAUSED --dry-run
 ./bin/rad adgroup update "US Retargeting" --configured-status ACTIVE
+./bin/rad targeting communities search --query gaming
+./bin/rad targeting keywords suggest --keyword fishing --keyword reels
 ./bin/rad report campaign-summary --since 30d
 ./bin/rad report campaign-summary --campaign <campaign-name>
 ./bin/rad report campaign-summary --since 30d --csv
