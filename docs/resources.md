@@ -7,6 +7,7 @@
 - ads
 
 Campaigns now also support `create` and `update`.
+Ad groups now also support `create` and `update`.
 
 ## Name or ID
 
@@ -51,6 +52,8 @@ Notes:
 ```bash
 ./bin/rad adgroup list
 ./bin/rad adgroup get <id-or-name>
+./bin/rad adgroup create --campaign <id-or-name> --name <name> --configured-status <status>
+./bin/rad adgroup update <id-or-name> [flags]
 ```
 
 ## Ads

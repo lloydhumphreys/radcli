@@ -70,13 +70,7 @@ func (a *App) Run(ctx context.Context, args []string) error {
 	case "campaign":
 		return a.runCampaignCommand(ctx, args[1:])
 	case "adgroup":
-		return a.runAssetCommand(ctx, assetDefinition{
-			Command:            "adgroup",
-			Label:              "ad group",
-			CollectionEndpoint: "ad_groups",
-			ItemEndpoint:       "ad_groups",
-			ListColumns:        []string{"id", "name", "campaign_id", "configured_status", "effective_status", "bid_amount"},
-		}, args[1:])
+		return a.runAdGroupCommand(ctx, args[1:])
 	case "ad":
 		return a.runAssetCommand(ctx, assetDefinition{
 			Command:            "ad",
@@ -646,6 +640,7 @@ Examples:
   rad campaign get <id-or-name>
   rad campaign create --name <name> --objective <objective> --configured-status PAUSED
   rad campaign update <id-or-name> --name <name>
+  rad adgroup create --campaign <campaign> --name <name> --configured-status PAUSED --dry-run
   rad report campaign-summary --since 7d
   rad report run --from 2026-03-01T00:00:00Z --to 2026-03-08T00:00:00Z --field IMPRESSIONS --field CLICKS`
 

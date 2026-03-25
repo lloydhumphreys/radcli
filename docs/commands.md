@@ -52,6 +52,8 @@ This is the current supported command surface for `radcli`.
 ```bash
 ./bin/rad adgroup list [--account-id <id-or-name>] [--all] [--page-size N] [--json]
 ./bin/rad adgroup get <id-or-name> [--account-id <id-or-name>] [--json]
+./bin/rad adgroup create --campaign <id-or-name> --name <name> --configured-status <status> [--account-id <id-or-name>] [--bid-strategy <bidless|maximize_volume|target_cpx>] [--bid-type <cpc|cpm|cpv|cpv6>] [--bid-value <major-currency>] [--goal-type <daily_spend|lifetime_spend>] [--goal-value <major-currency>] [--optimization-goal <goal>] [--optimization-strategy-type <type>] [--start-time <rfc3339>] [--end-time <rfc3339>] [--app-id <id>] [--conversion-pixel-id <id>] [--view-through-conversion-type <type>] [--saved-audience-id <id>] [--product-set-id <id>] [--shopping-type <dynamic|static>] [--targeting-json <json-or-@file>] [--schedule-json <json-or-@file>] [--shopping-targeting-json <json-or-@file>] [--dry-run]
+./bin/rad adgroup update <id-or-name> [--account-id <id-or-name>] [--campaign <id-or-name>] [--name <name>] [--configured-status <status>] [--bid-strategy <bidless|maximize_volume|target_cpx>] [--bid-type <cpc|cpm|cpv|cpv6>] [--bid-value <major-currency>] [--goal-type <daily_spend|lifetime_spend>] [--goal-value <major-currency>] [--optimization-goal <goal>] [--optimization-strategy-type <type>] [--start-time <rfc3339>] [--end-time <rfc3339>] [--app-id <id>] [--conversion-pixel-id <id>] [--view-through-conversion-type <type>] [--saved-audience-id <id>] [--product-set-id <id>] [--shopping-type <dynamic|static>] [--targeting-json <json-or-@file>] [--schedule-json <json-or-@file>] [--shopping-targeting-json <json-or-@file>] [--dry-run]
 ```
 
 ## Ads
@@ -109,6 +111,8 @@ Common patterns:
 ./bin/rad campaign get <campaign-name>
 ./bin/rad campaign create --name "Spring Launch" --objective CLICKS --configured-status PAUSED --dry-run
 ./bin/rad campaign update "Spring Launch" --configured-status ACTIVE
+./bin/rad adgroup create --campaign "Spring Launch" --name "US Retargeting" --configured-status PAUSED --dry-run
+./bin/rad adgroup update "US Retargeting" --configured-status ACTIVE
 ./bin/rad report campaign-summary --since 30d
 ./bin/rad report campaign-summary --campaign <campaign-name>
 ./bin/rad report campaign-summary --since 30d --csv
