@@ -46,6 +46,14 @@ This is the current supported command surface for `radcli`.
 ./bin/rad funding allocations <funding-instrument-id-or-name> [--account-id <id-or-name>] [--all] [--page-size N] [--json]
 ```
 
+## Pixels
+
+```bash
+./bin/rad pixel list [--account-id <id-or-name>] [--all] [--page-size N] [--json]
+./bin/rad pixel business-list [--business-id <id-or-name>] [--all] [--page-size N] [--json]
+./bin/rad pixel events <pixel-id-or-name> [--account-id <id-or-name>] [--json]
+```
+
 ## Campaigns
 
 ```bash
@@ -130,6 +138,7 @@ Common patterns:
 ./bin/rad account list
 ./bin/rad account use <account-name>
 ./bin/rad funding list
+./bin/rad pixel list
 ./bin/rad campaign list
 ./bin/rad campaign get <campaign-name>
 ./bin/rad campaign create --name "Spring Launch" --objective CLICKS --configured-status PAUSED --dry-run
