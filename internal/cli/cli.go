@@ -73,6 +73,10 @@ func (a *App) Run(ctx context.Context, args []string) error {
 		return a.runPixelCommand(ctx, args[1:])
 	case "audience":
 		return a.runAudienceCommand(ctx, args[1:])
+	case "profile":
+		return a.runProfileCommand(ctx, args[1:])
+	case "post":
+		return a.runPostCommand(ctx, args[1:])
 	case "campaign":
 		return a.runCampaignCommand(ctx, args[1:])
 	case "adgroup":
@@ -628,6 +632,8 @@ Commands:
   funding   Look up funding instruments
   pixel     Look up pixels and event activity
   audience  Work with saved and custom audiences
+  profile   Look up Reddit profiles
+  post      Work with ad creatives/posts
   campaign  List campaigns
   adgroup   List ad groups
   ad        List ads
@@ -645,6 +651,8 @@ Examples:
   rad funding list
   rad pixel list
   rad audience saved list
+  rad profile list
+  rad post create --profile <profile> --type IMAGE --headline <headline> --content-json @content.json --dry-run
   rad campaign list
   rad ad create --ad-group <ad-group> --name <name> --configured-status PAUSED --dry-run
   rad campaign get <id-or-name>

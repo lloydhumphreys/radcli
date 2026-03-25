@@ -66,6 +66,22 @@ This is the current supported command surface for `radcli`.
 ./bin/rad audience third-party list [--all] [--page-size N] [--json]
 ```
 
+## Profiles
+
+```bash
+./bin/rad profile list [--account-id <id-or-name>] [--all] [--page-size N] [--json]
+./bin/rad profile business-list [--business-id <id-or-name>] [--all] [--page-size N] [--json]
+```
+
+## Posts
+
+```bash
+./bin/rad post list --profile <id-or-name> [--type <type>] [--source <source>] [--account-id <id-or-name>] [--all] [--page-size N] [--json]
+./bin/rad post get <post-id> [--json]
+./bin/rad post create --profile <id-or-name> --type <IMAGE|VIDEO|TEXT|CAROUSEL> --headline <headline> [--body <text>] [--content-json <json-or-@file>] [--allow-comments <true|false>] [--is-richtext <true|false>] [--thumbnail-url <url>] [--account-id <id-or-name>] [--dry-run]
+./bin/rad post update <post-id> --allow-comments <true|false> [--dry-run] [--json]
+```
+
 ## Campaigns
 
 ```bash
@@ -154,6 +170,8 @@ Common patterns:
 ./bin/rad funding list
 ./bin/rad pixel list
 ./bin/rad audience saved list
+./bin/rad profile list
+./bin/rad post create --profile "brand_profile" --type IMAGE --headline "Spring Launch" --content-json @content.json --dry-run
 ./bin/rad campaign list
 ./bin/rad ad create --ad-group "US Retargeting" --name "Spring Ad" --configured-status PAUSED --dry-run
 ./bin/rad campaign get <campaign-name>

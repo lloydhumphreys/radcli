@@ -13,6 +13,8 @@ This folder is the start of the public-facing docs for `radcli`.
 - [pixels.md](./pixels.md): pixel and conversion activity lookup helpers
 - [audiences.md](./audiences.md): saved, custom, and third-party audiences
 - [ads.md](./ads.md): ad list, get, create, and update
+- [profiles.md](./profiles.md): profile lookup helpers
+- [posts.md](./posts.md): post/creative list, get, create, and update
 - [login.md](./login.md): Reddit Ads authentication flow
 - [resources.md](./resources.md): campaigns, ad groups, and ads
 - [reports.md](./reports.md): report commands, presets, fields, and output formats
@@ -31,6 +33,7 @@ This folder is the start of the public-facing docs for `radcli`.
 - looking up pixels and event activity
 - managing saved audiences and looking up custom audiences
 - creating and updating ads
+- managing profiles and posts/creatives
 - running raw reports
 - running enriched summary reports
 - filtering summary reports by campaign, ad group, and ad
