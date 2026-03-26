@@ -9,7 +9,6 @@ An unofficial command-line interface for Reddit Ads. Fast, scriptable, no browse
 ```bash
 brew tap lloydhumphreys/radcli
 brew install --cask radcli
-rehash
 rad version
 ```
 
