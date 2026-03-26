@@ -5,14 +5,15 @@
 - GitHub Releases
 - Homebrew tap publishing
 - in-place binary updates with `rad self-update`
+- direct install from GitHub with `curl | bash`
 
 ## Versioning
 
 The binary exposes build metadata:
 
 ```bash
-./bin/rad version
-./bin/rad version --json
+rad version
+rad version --json
 ```
 
 Release builds inject:
@@ -110,14 +111,54 @@ That token needs content write access to the tap repository.
 Once releases are flowing and the tap repo is configured, users can install with:
 
 ```bash
+brew install --cask lloydhumphreys/radcli/radcli
+rehash
+```
+
+Notes:
+
+- `brew tap lloydhumphreys/radcli` only adds the tap; it does not install `rad`
+- the two-step flow is still valid:
+
+```bash
 brew tap lloydhumphreys/radcli
 brew install --cask radcli
+rehash
 ```
+
+- if `rad` is still not found, start a new shell or verify `$(brew --prefix)/bin`
+  is present in `PATH`
 
 And upgrade with:
 
 ```bash
 brew upgrade --cask radcli
+```
+
+## Curl Install
+
+The repository includes a GitHub-release installer at:
+
+```text
+install.sh
+```
+
+Install the latest release:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/lloydhumphreys/radcli/main/install.sh | bash
+```
+
+Install a specific release:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/lloydhumphreys/radcli/main/install.sh | bash -s -- --version v0.1.0
+```
+
+Install to a custom directory:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/lloydhumphreys/radcli/main/install.sh | INSTALL_DIR="$HOME/.local/bin" bash
 ```
 
 ## Suggested First Distribution Rollout

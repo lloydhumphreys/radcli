@@ -1,6 +1,6 @@
 # radcli
 
-A command-line interface for Reddit Ads. Fast, scriptable, no browser required.
+An unofficial command-line interface for Reddit Ads. Fast, scriptable, no browser required.
 
 ## Install
 
@@ -9,7 +9,19 @@ A command-line interface for Reddit Ads. Fast, scriptable, no browser required.
 ```bash
 brew tap lloydhumphreys/radcli
 brew install --cask radcli
+rehash
+rad version
 ```
+
+**GitHub release installer:**
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/lloydhumphreys/radcli/main/install.sh | bash
+rad version
+```
+
+If `rad` is still not found after install, open a new shell or confirm your
+`PATH` includes `$(brew --prefix)/bin`.
 
 **From source:**
 
@@ -127,3 +139,8 @@ body before sending it.
 ## License
 
 [MIT](./LICENSE)
+
+## Disclaimer
+
+`radcli` is an unofficial tool. It is not affiliated with, endorsed by, or
+supported by Reddit, Inc. or the Reddit Ads team.
