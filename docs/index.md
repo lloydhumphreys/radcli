@@ -5,7 +5,6 @@ This folder is the start of the public-facing docs for `radcli`.
 ## Start Here
 
 - [commands.md](./commands.md): current command reference
-- [api-coverage.md](./api-coverage.md): API/docs coverage checklist
 - [campaigns.md](./campaigns.md): campaign list, get, create, and update
 - [adgroups.md](./adgroups.md): ad group list, get, create, and update
 - [targeting.md](./targeting.md): targeting lookup helpers
