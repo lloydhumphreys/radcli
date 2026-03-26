@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"strings"
 
-	"radcli/internal/output"
+	"github.com/lloydhumphreys/radcli/internal/output"
 )
 
 var adDefinition = assetDefinition{

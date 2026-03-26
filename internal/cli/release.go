@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"strings"
 
-	"radcli/internal/output"
-	"radcli/internal/releaseinfo"
+	"github.com/lloydhumphreys/radcli/internal/output"
+	"github.com/lloydhumphreys/radcli/internal/releaseinfo"
 )
 
 func (a *App) runVersion(args []string) error {

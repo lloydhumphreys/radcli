@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"os"
 
-	"radcli/internal/cli"
-	"radcli/internal/releaseinfo"
+	"github.com/lloydhumphreys/radcli/internal/cli"
+	"github.com/lloydhumphreys/radcli/internal/releaseinfo"
 )
 
 var (

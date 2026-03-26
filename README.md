@@ -11,6 +11,8 @@ Today `radcli` is already useful for:
 - authenticating with Reddit Ads
 - selecting a default business and ad account
 - listing and inspecting campaigns, ad groups, and ads
+- creating and updating campaigns, ad groups, ads, and creatives
+- looking up targeting entities, funding instruments, pixels, and audiences
 - running raw reports
 - running enriched summary reports
 - filtering reports by campaign, ad group, and ad
@@ -29,7 +31,8 @@ for repeated operator tasks. `radcli` is meant to be a daily-driver tool for:
 ## Build
 
 ```bash
-cd /Users/lloyd/Code/radcli
+git clone https://github.com/lloydhumphreys/radcli.git
+cd radcli
 env GOCACHE=$PWD/.gocache go build -o bin/rad ./cmd/rad
 ```
 
@@ -41,7 +44,7 @@ Release/distribution scaffolding is included for:
 - Homebrew tap publishing
 - `rad self-update`
 
-Local examples:
+From a local checkout:
 
 ```bash
 ./bin/rad version
@@ -51,7 +54,7 @@ Local examples:
 Once releases are live, the intended Homebrew flow is:
 
 ```bash
-brew tap OWNER/TAP_REPO
+brew tap lloydhumphreys/radcli
 brew install --cask radcli
 brew upgrade --cask radcli
 ```
@@ -63,6 +66,8 @@ brew upgrade --cask radcli
 3. Log in once.
 4. Pick a business and ad account.
 5. Start listing assets and running reports.
+
+For the full login flow and redirect URI notes, see [`docs/login.md`](./docs/login.md).
 
 Example:
 
@@ -94,6 +99,10 @@ Example:
 ./bin/rad campaign get "Spring Launch"
 ./bin/rad adgroup get "Retargeting"
 ./bin/rad ad get "Winner Variant"
+
+./bin/rad campaign create --name "Spring Launch" --objective CLICKS --configured-status PAUSED --dry-run
+./bin/rad adgroup create --campaign "Spring Launch" --name "US Retargeting" --configured-status PAUSED --dry-run
+./bin/rad ad create --ad-group "US Retargeting" --name "Spring Ad" --configured-status PAUSED --dry-run
 
 ./bin/rad report campaign-summary --since 30d
 ./bin/rad report campaign-summary --campaign "Spring Launch" --since 30d

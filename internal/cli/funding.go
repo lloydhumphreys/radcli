@@ -7,7 +7,7 @@ import (
 	"net/url"
 	"strings"
 
-	"radcli/internal/output"
+	"github.com/lloydhumphreys/radcli/internal/output"
 )
 
 func (a *App) runFundingCommand(ctx context.Context, args []string) error {

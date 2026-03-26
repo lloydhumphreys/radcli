@@ -8,7 +8,7 @@ import (
 	"sort"
 	"strings"
 
-	"radcli/internal/output"
+	"github.com/lloydhumphreys/radcli/internal/output"
 )
 
 func (a *App) runPixelCommand(ctx context.Context, args []string) error {

@@ -15,7 +15,7 @@ import (
 	"strings"
 	"time"
 
-	"radcli/internal/config"
+	"github.com/lloydhumphreys/radcli/internal/config"
 )
 
 const (

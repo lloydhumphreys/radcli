@@ -8,7 +8,7 @@ import (
 	"os"
 	"strings"
 
-	"radcli/internal/output"
+	"github.com/lloydhumphreys/radcli/internal/output"
 )
 
 var adGroupDefinition = assetDefinition{

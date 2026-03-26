@@ -12,10 +12,10 @@ import (
 	"strconv"
 	"strings"
 
-	"radcli/internal/config"
-	"radcli/internal/output"
-	"radcli/internal/reddit"
-	"radcli/internal/releaseinfo"
+	"github.com/lloydhumphreys/radcli/internal/config"
+	"github.com/lloydhumphreys/radcli/internal/output"
+	"github.com/lloydhumphreys/radcli/internal/reddit"
+	"github.com/lloydhumphreys/radcli/internal/releaseinfo"
 )
 
 type App struct {

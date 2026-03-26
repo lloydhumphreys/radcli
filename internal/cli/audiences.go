@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"net/url"
 
-	"radcli/internal/output"
+	"github.com/lloydhumphreys/radcli/internal/output"
 )
 
 var savedAudienceDefinition = assetDefinition{

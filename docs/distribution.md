@@ -91,7 +91,7 @@ workflow runs in the main repository.
 Create a separate tap repository, for example:
 
 ```text
-OWNER/homebrew-tap
+lloydhumphreys/homebrew-radcli
 ```
 
 Then set this repository variable:
@@ -110,7 +110,7 @@ That token needs content write access to the tap repository.
 Once releases are flowing and the tap repo is configured, users can install with:
 
 ```bash
-brew tap OWNER/TAP_REPO
+brew tap lloydhumphreys/radcli
 brew install --cask radcli
 ```
 

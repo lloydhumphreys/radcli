@@ -10,7 +10,7 @@ import (
 	"strings"
 	"time"
 
-	"radcli/internal/output"
+	"github.com/lloydhumphreys/radcli/internal/output"
 )
 
 type reportPreset struct {

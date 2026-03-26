@@ -7,7 +7,7 @@ import (
 	"net/url"
 	"strings"
 
-	"radcli/internal/output"
+	"github.com/lloydhumphreys/radcli/internal/output"
 )
 
 type assetDefinition struct {

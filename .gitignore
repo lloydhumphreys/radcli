@@ -1,6 +1,10 @@
-.build
-.build-scratch
-.swiftpm
-DerivedData
-bin
-.gocache
+.build/
+.build-scratch/
+.swiftpm/
+DerivedData/
+bin/
+dist/
+.gocache/
+coverage.out
+*.test
+.DS_Store

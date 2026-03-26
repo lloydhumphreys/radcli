@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"strings"
 
-	"radcli/internal/output"
+	"github.com/lloydhumphreys/radcli/internal/output"
 )
 
 var campaignDefinition = assetDefinition{
