@@ -20,7 +20,8 @@ rad version
 ```
 
 If `rad` is still not found after install, open a new shell or confirm your
-`PATH` includes `$(brew --prefix)/bin`.
+`PATH` includes the install directory. For Homebrew that is usually
+`$(brew --prefix)/bin`; the release installer may use `$HOME/.local/bin`.
 
 **From source:**
 
@@ -59,6 +60,19 @@ https://yourdomain.com/oauth/callback?state=abc123&code=def456#_
 Copy the entire URL from your browser's address bar and paste it back into the
 terminal. `rad` extracts the code automatically and exchanges it for an access
 token. You can also paste just the code value if you prefer.
+
+If you used `rad auth login --no-wait` or you are not in an interactive
+terminal, finish with the full callback URL:
+
+```bash
+rad auth complete --url 'https://yourdomain.com/oauth/callback?state=abc123&code=def456#_'
+```
+
+Or pass the pieces separately:
+
+```bash
+rad auth complete --code def456 --state abc123
+```
 
 If the redirect URI doesn't resolve to a real server, that's fine — you only
 need the URL from the address bar, not for the page to load.
@@ -127,7 +141,8 @@ rad audience saved list
 Every command supports `--json` for machine-readable output. Reports also
 support `--csv`. Use `--dry-run` on any write command to preview the request
 body before sending it. Use `rad update` to install the latest published
-version in place.
+version in place. If you built from source without embedded repo metadata, set
+`RADCLI_UPDATE_REPOSITORY=lloydhumphreys/radcli` before using `rad update`.
 
 ## Docs
 

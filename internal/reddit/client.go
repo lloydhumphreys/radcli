@@ -12,6 +12,7 @@ import (
 	"net/http"
 	"net/url"
 	"os/exec"
+	"runtime"
 	"strings"
 	"time"
 
@@ -338,8 +339,25 @@ func (c *Client) doRequestJSON(ctx context.Context, method, rawURL, authorizatio
 }
 
 func OpenBrowser(rawURL string) error {
-	cmd := exec.Command("/usr/bin/open", rawURL)
+	name, args, err := browserCommandForOS(runtime.GOOS, rawURL)
+	if err != nil {
+		return err
+	}
+	cmd := exec.Command(name, args...)
 	return cmd.Run()
+}
+
+func browserCommandForOS(goos, rawURL string) (string, []string, error) {
+	switch goos {
+	case "darwin":
+		return "/usr/bin/open", []string{rawURL}, nil
+	case "linux":
+		return "xdg-open", []string{rawURL}, nil
+	case "windows":
+		return "rundll32", []string{"url.dll,FileProtocolHandler", rawURL}, nil
+	default:
+		return "", nil, fmt.Errorf("opening a browser is not supported on %s; open the URL manually", goos)
+	}
 }
 
 func nextURL(response map[string]any) string {

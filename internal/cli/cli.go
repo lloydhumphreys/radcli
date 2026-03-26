@@ -167,7 +167,7 @@ func (a *App) runAuth(ctx context.Context, args []string) error {
 			}
 		}
 		if *noWait || !a.interactive {
-			_, err := fmt.Fprintln(a.stdout, "\nAfter the redirect, copy the `code` query parameter and run:\n  rad auth complete --code <code>")
+			_, err := fmt.Fprintln(a.stdout, "\nAfter the redirect, run either:\n  rad auth complete --url '<full callback URL>'\nor:\n  rad auth complete --code <code> --state <state>")
 			return err
 		}
 		return a.finishInteractiveLogin(ctx, expectedState)
@@ -175,19 +175,18 @@ func (a *App) runAuth(ctx context.Context, args []string) error {
 		fs := newFlagSet("auth complete")
 		code := fs.String("code", "", "")
 		state := fs.String("state", "", "")
+		callbackURL := fs.String("url", "", "")
 		if err := parseFlags(fs, args[1:]); err != nil {
 			return err
 		}
-		if *code == "" {
-			return errors.New("auth complete requires --code")
-		}
-		if *state != "" && a.store.Config.Auth.PendingState != "" && *state != a.store.Config.Auth.PendingState {
-			return errors.New("provided --state does not match the pending login state")
-		}
-		if _, err := a.api.ExchangeAuthorizationCode(ctx, *code); err != nil {
+		resolvedCode, _, err := resolveAuthorizationCompletion(*code, *state, *callbackURL, a.store.Config.Auth.PendingState)
+		if err != nil {
 			return err
 		}
-		_, err := fmt.Fprintln(a.stdout, "Authentication complete. Run `rad auth whoami` or `rad business list` next.")
+		if _, err := a.api.ExchangeAuthorizationCode(ctx, resolvedCode); err != nil {
+			return err
+		}
+		_, err = fmt.Fprintln(a.stdout, "Authentication complete. Run `rad auth whoami` or `rad business list` next.")
 		return err
 	case "whoami":
 		fs := newFlagSet("auth whoami")
@@ -620,6 +619,42 @@ func parseAuthorizationInput(input string) (string, string, error) {
 	return code, "", nil
 }
 
+func resolveAuthorizationCompletion(codeArg, stateArg, urlArg, pendingState string) (string, string, error) {
+	if codeArg != "" && urlArg != "" {
+		return "", "", errors.New("use only one of --code or --url")
+	}
+
+	code := codeArg
+	state := stateArg
+	if urlArg != "" {
+		parsedCode, parsedState, err := parseAuthorizationInput(urlArg)
+		if err != nil {
+			return "", "", err
+		}
+		if state != "" && parsedState != "" && state != parsedState {
+			return "", "", errors.New("--state does not match the state in --url")
+		}
+		code = parsedCode
+		if state == "" {
+			state = parsedState
+		}
+	}
+
+	if code == "" {
+		return "", "", errors.New("auth complete requires --code or --url")
+	}
+	if pendingState != "" {
+		if state == "" {
+			return "", "", errors.New("auth complete requires --state or --url while a login is pending")
+		}
+		if state != pendingState {
+			return "", "", errors.New("provided callback state does not match the pending login state")
+		}
+	}
+
+	return code, state, nil
+}
+
 type stringList []string
 
 func (s *stringList) String() string {
@@ -679,7 +714,7 @@ Examples:
 const authHelp = `Usage:
   rad auth setup --client-id <id> --client-secret <secret> --redirect-uri <uri> [--scope adsread] [--user-agent ua]
   rad auth login [--open] [--no-wait]
-  rad auth complete --code <code> [--state <state>]
+  rad auth complete (--code <code> [--state <state>] | --url <callback-url>)
   rad auth whoami [--json]
   rad auth logout`
 
