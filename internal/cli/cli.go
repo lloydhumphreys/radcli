@@ -70,6 +70,8 @@ func (a *App) Run(ctx context.Context, args []string) error {
 		return a.runUpdate(ctx, args[1:])
 	case "auth":
 		return a.runAuth(ctx, args[1:])
+	case "whoami":
+		return a.runAuth(ctx, append([]string{"whoami"}, args[1:]...))
 	case "config":
 		return a.runConfig(args[1:])
 	case "business":
