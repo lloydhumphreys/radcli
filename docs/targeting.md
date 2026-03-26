@@ -6,15 +6,15 @@ group targeting payloads without digging through the website.
 ## Supported Commands
 
 ```bash
-./bin/rad targeting communities search --query <text>
-./bin/rad targeting communities list [--name <community> ...]
-./bin/rad targeting communities suggest [--name <community> ...] [--website-url <url>]
-./bin/rad targeting interests list
-./bin/rad targeting geolocations search [--postal-code <code>] [--city <name>] [--country <code>]
-./bin/rad targeting devices list
-./bin/rad targeting carriers list
-./bin/rad targeting keywords suggest --keyword <term> [--keyword <term> ...]
-./bin/rad targeting keywords validate --keyword <term> [--keyword <term> ...]
+rad targeting communities search --query <text>
+rad targeting communities list [--name <community> ...]
+rad targeting communities suggest [--name <community> ...] [--website-url <url>]
+rad targeting interests list
+rad targeting geolocations search [--postal-code <code>] [--city <name>] [--country <code>]
+rad targeting devices list
+rad targeting carriers list
+rad targeting keywords suggest --keyword <term> [--keyword <term> ...]
+rad targeting keywords validate --keyword <term> [--keyword <term> ...]
 ```
 
 ## Communities
@@ -22,20 +22,20 @@ group targeting payloads without digging through the website.
 Search by free text:
 
 ```bash
-./bin/rad targeting communities search --query gaming
+rad targeting communities search --query gaming
 ```
 
 Look up exact communities:
 
 ```bash
-./bin/rad targeting communities list --name games --name pcmasterrace
+rad targeting communities list --name games --name pcmasterrace
 ```
 
 Get suggestions from a seed community or website:
 
 ```bash
-./bin/rad targeting communities suggest --name games
-./bin/rad targeting communities suggest --website-url https://example.com
+rad targeting communities suggest --name games
+rad targeting communities suggest --website-url https://example.com
 ```
 
 ## Interests
@@ -43,7 +43,7 @@ Get suggestions from a seed community or website:
 List the currently available interest taxonomy:
 
 ```bash
-./bin/rad targeting interests list
+rad targeting interests list
 ```
 
 ## Geolocations
@@ -51,16 +51,16 @@ List the currently available interest taxonomy:
 Search by postal code, city, or country:
 
 ```bash
-./bin/rad targeting geolocations search --postal-code 94107
-./bin/rad targeting geolocations search --city Copenhagen --country DK
-./bin/rad targeting geolocations search --country US
+rad targeting geolocations search --postal-code 94107
+rad targeting geolocations search --city Copenhagen --country DK
+rad targeting geolocations search --country US
 ```
 
 ## Devices And Carriers
 
 ```bash
-./bin/rad targeting devices list
-./bin/rad targeting carriers list
+rad targeting devices list
+rad targeting carriers list
 ```
 
 Both commands support `--all`, `--page-size`, and `--json`.
@@ -70,13 +70,13 @@ Both commands support `--all`, `--page-size`, and `--json`.
 Get keyword suggestions from one or more seed keywords:
 
 ```bash
-./bin/rad targeting keywords suggest --keyword fishing --keyword reels
+rad targeting keywords suggest --keyword fishing --keyword reels
 ```
 
 Validate keywords for brand safety:
 
 ```bash
-./bin/rad targeting keywords validate --keyword fishing --keyword reels
+rad targeting keywords validate --keyword fishing --keyword reels
 ```
 
 ## Output

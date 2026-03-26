@@ -5,9 +5,9 @@
 ## Supported Commands
 
 ```bash
-./bin/rad pixel list
-./bin/rad pixel business-list
-./bin/rad pixel events <pixel-id-or-name>
+rad pixel list
+rad pixel business-list
+rad pixel events <pixel-id-or-name>
 ```
 
 ## Account-Level Listing
@@ -15,7 +15,7 @@
 List pixels for the currently selected ad account:
 
 ```bash
-./bin/rad pixel list
+rad pixel list
 ```
 
 This is the fastest way to find a pixel ID to use with campaign or ad group
@@ -26,8 +26,8 @@ optimization settings.
 List pixels for the currently selected business:
 
 ```bash
-./bin/rad pixel business-list
-./bin/rad pixel business-list --business-id YOUR_BUSINESS_ID
+rad pixel business-list
+rad pixel business-list --business-id YOUR_BUSINESS_ID
 ```
 
 ## Event Activity
@@ -35,8 +35,8 @@ List pixels for the currently selected business:
 Inspect the `last_fired_at` activity breakdown for a pixel by ID or exact name:
 
 ```bash
-./bin/rad pixel events "Main Pixel"
-./bin/rad pixel events 1234567890
+rad pixel events "Main Pixel"
+rad pixel events 1234567890
 ```
 
 This returns a simple table keyed by event name, which is useful for checking

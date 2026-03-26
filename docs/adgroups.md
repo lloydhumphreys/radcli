@@ -5,10 +5,10 @@
 ## Supported Commands
 
 ```bash
-./bin/rad adgroup list
-./bin/rad adgroup get <id-or-name>
-./bin/rad adgroup create --campaign <id-or-name> --name <name> --configured-status <status>
-./bin/rad adgroup update <id-or-name> [flags]
+rad adgroup list
+rad adgroup get <id-or-name>
+rad adgroup create --campaign <id-or-name> --name <name> --configured-status <status>
+rad adgroup update <id-or-name> [flags]
 ```
 
 ## Name Or ID
@@ -32,7 +32,7 @@ The minimum required fields are:
 Example:
 
 ```bash
-./bin/rad adgroup create \
+rad adgroup create \
   --campaign "Spring Launch" \
   --name "US Retargeting" \
   --configured-status PAUSED \
@@ -45,8 +45,8 @@ Example:
 You can update an ad group by name or ID:
 
 ```bash
-./bin/rad adgroup update "US Retargeting" --configured-status ACTIVE
-./bin/rad adgroup update 123456789 --goal-value 25
+rad adgroup update "US Retargeting" --configured-status ACTIVE
+rad adgroup update 123456789 --goal-value 25
 ```
 
 ## Dry Runs
@@ -54,7 +54,7 @@ You can update an ad group by name or ID:
 Use `--dry-run` to inspect the JSON request body without sending it to Reddit:
 
 ```bash
-./bin/rad adgroup create \
+rad adgroup create \
   --campaign 2145032584377720495 \
   --name "US Retargeting" \
   --configured-status PAUSED \
@@ -98,7 +98,7 @@ The first write cut supports:
 Example:
 
 ```bash
-./bin/rad adgroup create \
+rad adgroup create \
   --campaign "Spring Launch" \
   --name "US Retargeting" \
   --configured-status PAUSED \
@@ -112,11 +112,11 @@ That means `1.25` is sent to the API as `1250000` micros.
 For nested payloads, `radcli` accepts either inline JSON or `@file` syntax:
 
 ```bash
-./bin/rad adgroup update "US Retargeting" \
+rad adgroup update "US Retargeting" \
   --targeting-json '{"locations":["US"]}' \
   --dry-run
 
-./bin/rad adgroup update "US Retargeting" \
+rad adgroup update "US Retargeting" \
   --targeting-json @targeting.json \
   --schedule-json @schedule.json \
   --dry-run

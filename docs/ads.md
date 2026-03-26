@@ -5,10 +5,10 @@
 ## Supported Commands
 
 ```bash
-./bin/rad ad list
-./bin/rad ad get <id-or-name>
-./bin/rad ad create --ad-group <id-or-name> --name <name> --configured-status <status>
-./bin/rad ad update <id-or-name> [flags]
+rad ad list
+rad ad get <id-or-name>
+rad ad create --ad-group <id-or-name> --name <name> --configured-status <status>
+rad ad update <id-or-name> [flags]
 ```
 
 ## Name Or ID
@@ -31,7 +31,7 @@ The minimum required fields are:
 Example:
 
 ```bash
-./bin/rad ad create \
+rad ad create \
   --ad-group "US Retargeting" \
   --name "Spring Ad" \
   --configured-status PAUSED \
@@ -44,8 +44,8 @@ Example:
 You can update an ad by name or ID:
 
 ```bash
-./bin/rad ad update "Spring Ad" --configured-status ACTIVE
-./bin/rad ad update 123456789 --click-url https://example.com
+rad ad update "Spring Ad" --configured-status ACTIVE
+rad ad update 123456789 --click-url https://example.com
 ```
 
 ## First Write Slice
@@ -66,7 +66,7 @@ every creative variant.
 For shopping ads, pass the creative payload as inline JSON or `@file`:
 
 ```bash
-./bin/rad ad update "Catalog Ad" \
+rad ad update "Catalog Ad" \
   --shopping-creative-json @shopping-creative.json \
   --dry-run
 ```
@@ -76,7 +76,7 @@ For shopping ads, pass the creative payload as inline JSON or `@file`:
 Use `--dry-run` to inspect the JSON request body without sending it to Reddit:
 
 ```bash
-./bin/rad ad create \
+rad ad create \
   --ad-group 2145032584377720495 \
   --name "Spring Ad" \
   --configured-status PAUSED \
@@ -92,7 +92,7 @@ having to resolve the ad group name first.
 `--click-url-query-parameter` accepts repeated `name=value` pairs:
 
 ```bash
-./bin/rad ad update "Spring Ad" \
+rad ad update "Spring Ad" \
   --click-url https://example.com \
   --click-url-query-parameter utm_source=reddit \
   --click-url-query-parameter utm_medium={{AD_ID}}

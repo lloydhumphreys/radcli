@@ -5,10 +5,10 @@
 ## Supported Commands
 
 ```bash
-./bin/rad post list --profile <id-or-name>
-./bin/rad post get <post-id>
-./bin/rad post create --profile <id-or-name> --type <type> --headline <headline>
-./bin/rad post update <post-id> --allow-comments <true|false>
+rad post list --profile <id-or-name>
+rad post get <post-id>
+rad post create --profile <id-or-name> --type <type> --headline <headline>
+rad post update <post-id> --allow-comments <true|false>
 ```
 
 ## Profiles First
@@ -16,7 +16,7 @@
 Posts are created under Reddit profiles, so it usually starts with:
 
 ```bash
-./bin/rad profile list
+rad profile list
 ```
 
 Then use the profile name or ID with `rad post`.
@@ -24,9 +24,9 @@ Then use the profile name or ID with `rad post`.
 ## List And Inspect Posts
 
 ```bash
-./bin/rad post list --profile "brand_profile"
-./bin/rad post list --profile "brand_profile" --type IMAGE
-./bin/rad post get t3_abcdef
+rad post list --profile "brand_profile"
+rad post list --profile "brand_profile" --type IMAGE
+rad post get t3_abcdef
 ```
 
 ## Create Posts
@@ -40,14 +40,14 @@ The minimum required fields are:
 Examples:
 
 ```bash
-./bin/rad post create \
+rad post create \
   --profile "brand_profile" \
   --type IMAGE \
   --headline "Spring Launch" \
   --content-json @content.json \
   --dry-run
 
-./bin/rad post create \
+rad post create \
   --profile "brand_profile" \
   --type TEXT \
   --headline "Spring Launch" \
@@ -62,7 +62,7 @@ For image, video, and carousel posts, pass the `content` array as inline JSON or
 `@file`:
 
 ```bash
-./bin/rad post create \
+rad post create \
   --profile "brand_profile" \
   --type IMAGE \
   --headline "Spring Launch" \
@@ -84,7 +84,7 @@ Reddit’s current v3 patch schema for posts is narrow. In this first slice,
 `radcli` exposes what the schema clearly supports:
 
 ```bash
-./bin/rad post update t3_abcdef --allow-comments false
+rad post update t3_abcdef --allow-comments false
 ```
 
 So this is not a full “edit every post field” command yet. It is currently a

@@ -5,6 +5,7 @@ DerivedData/
 bin/
 dist/
 .gocache/
+.gomodcache/
 coverage.out
 *.test
 .DS_Store

@@ -4,7 +4,7 @@
 
 - GitHub Releases
 - Homebrew tap publishing
-- in-place binary updates with `rad self-update`
+- in-place binary updates with `rad update`
 - direct install from GitHub with `curl | bash`
 
 ## Versioning
@@ -28,15 +28,15 @@ Release builds inject:
 Installed binaries can update themselves from GitHub Releases:
 
 ```bash
-rad self-update --check
-rad self-update
-rad self-update --version v0.1.0
-rad self-update --repo owner/repo
+rad update --check
+rad update
+rad update --version v0.1.0
+rad update --repo owner/repo
 ```
 
 Notes:
 
-- `rad self-update` uses the embedded release repository from the build
+- `rad update` uses the embedded release repository from the build
 - you can override that with `RADCLI_UPDATE_REPOSITORY=owner/repo`
 - current implementation supports in-place replacement on Unix-like systems
 - Windows currently falls back to manual download
@@ -181,4 +181,4 @@ git push origin main --tags
 - checksums are attached
 - the tap repo received the cask update
 - `rad version` shows release metadata
-- `rad self-update --check` sees the latest release
+- `rad update --check` sees the latest release

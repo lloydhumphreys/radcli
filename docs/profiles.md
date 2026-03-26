@@ -6,8 +6,8 @@ for post/creative management.
 ## Supported Commands
 
 ```bash
-./bin/rad profile list
-./bin/rad profile business-list
+rad profile list
+rad profile business-list
 ```
 
 ## Account-Level Listing
@@ -15,7 +15,7 @@ for post/creative management.
 List profiles for the currently selected ad account:
 
 ```bash
-./bin/rad profile list
+rad profile list
 ```
 
 ## Business-Level Listing
@@ -23,7 +23,7 @@ List profiles for the currently selected ad account:
 List profiles for the currently selected business:
 
 ```bash
-./bin/rad profile business-list
+rad profile business-list
 ```
 
 ## Output

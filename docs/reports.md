@@ -8,9 +8,9 @@ You can ask the CLI for the current report field list from Reddit's official v3
 OpenAPI metadata:
 
 ```bash
-./bin/rad report fields
-./bin/rad report fields --match conversion
-./bin/rad report fields --match ctr
+rad report fields
+rad report fields --match conversion
+rad report fields --match ctr
 ```
 
 ## Raw Reports
@@ -18,7 +18,7 @@ OpenAPI metadata:
 Use `report run` when you want direct control over fields and breakdowns.
 
 ```bash
-./bin/rad report run \
+rad report run \
   --from 2026-03-01T00:00:00Z \
   --to 2026-03-08T00:00:00Z \
   --field IMPRESSIONS \
@@ -30,7 +30,7 @@ Use `report run` when you want direct control over fields and breakdowns.
 Raw reports also support CSV output:
 
 ```bash
-./bin/rad report run \
+rad report run \
   --from 2026-03-01T00:00:00Z \
   --to 2026-03-08T00:00:00Z \
   --field IMPRESSIONS \
@@ -43,7 +43,7 @@ Raw reports also support CSV output:
 You can also write report output directly to a file:
 
 ```bash
-./bin/rad report run \
+rad report run \
   --from 2026-03-01T00:00:00Z \
   --to 2026-03-08T00:00:00Z \
   --field IMPRESSIONS \
@@ -83,32 +83,32 @@ Preset table output is enriched with human-readable names where possible:
 ### Campaign Summary
 
 ```bash
-./bin/rad report campaign-summary
-./bin/rad report campaign-summary --since 30d
-./bin/rad report campaign-summary --daily
-./bin/rad report campaign-summary --campaign "Spring Launch"
-./bin/rad report campaign-summary --campaign-id 123456789
-./bin/rad report campaign-summary --since 30d --csv
-./bin/rad report campaign-summary --since 30d --csv --output campaign-summary-30d.csv
+rad report campaign-summary
+rad report campaign-summary --since 30d
+rad report campaign-summary --daily
+rad report campaign-summary --campaign "Spring Launch"
+rad report campaign-summary --campaign-id 123456789
+rad report campaign-summary --since 30d --csv
+rad report campaign-summary --since 30d --csv --output campaign-summary-30d.csv
 ```
 
 ### Ad Group Summary
 
 ```bash
-./bin/rad report adgroup-summary
-./bin/rad report adgroup-summary --since 14d --daily
-./bin/rad report adgroup-summary --campaign "Spring Launch"
-./bin/rad report adgroup-summary --adgroup "Retargeting"
-./bin/rad report adgroup-summary --campaign-id 123 --adgroup-id 456
+rad report adgroup-summary
+rad report adgroup-summary --since 14d --daily
+rad report adgroup-summary --campaign "Spring Launch"
+rad report adgroup-summary --adgroup "Retargeting"
+rad report adgroup-summary --campaign-id 123 --adgroup-id 456
 ```
 
 ### Ad Summary
 
 ```bash
-./bin/rad report ad-summary
-./bin/rad report ad-summary --since 7d
-./bin/rad report ad-summary --campaign "Spring Launch" --adgroup "Retargeting"
-./bin/rad report ad-summary --ad "Winner Variant"
+rad report ad-summary
+rad report ad-summary --since 7d
+rad report ad-summary --campaign "Spring Launch" --adgroup "Retargeting"
+rad report ad-summary --ad "Winner Variant"
 ```
 
 ## Filtering Summary Reports
@@ -129,9 +129,9 @@ Support by preset:
 Examples:
 
 ```bash
-./bin/rad report campaign-summary --campaign "Spring Launch" --since 30d
-./bin/rad report adgroup-summary --adgroup "Retargeting" --since 7d
-./bin/rad report ad-summary --ad-id 2145032584377720495 --since 14d
+rad report campaign-summary --campaign "Spring Launch" --since 30d
+rad report adgroup-summary --adgroup "Retargeting" --since 7d
+rad report ad-summary --ad-id 2145032584377720495 --since 14d
 ```
 
 ## Time Windows
@@ -165,7 +165,7 @@ The API defaults to UTC unless you pass `--time-zone-id`.
 Example:
 
 ```bash
-./bin/rad report campaign-summary --since 7d --time-zone-id America/Los_Angeles
+rad report campaign-summary --since 7d --time-zone-id America/Los_Angeles
 ```
 
 ## Extra Fields
@@ -173,7 +173,7 @@ Example:
 You can extend a preset by adding more fields:
 
 ```bash
-./bin/rad report campaign-summary --field CONVERSIONS
+rad report campaign-summary --field CONVERSIONS
 ```
 
 ## Output

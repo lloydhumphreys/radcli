@@ -64,8 +64,10 @@ func (a *App) Run(ctx context.Context, args []string) error {
 		return err
 	case "version":
 		return a.runVersion(args[1:])
+	case "update":
+		return a.runUpdate(ctx, args[1:])
 	case "self-update":
-		return a.runSelfUpdate(ctx, args[1:])
+		return a.runUpdate(ctx, args[1:])
 	case "auth":
 		return a.runAuth(ctx, args[1:])
 	case "config":
@@ -633,7 +635,7 @@ const rootHelp = `radcli: Reddit Ads from the terminal
 
 Commands:
   version   Show build and release information
-  self-update Update the installed binary from GitHub Releases
+  update    Update the installed binary from GitHub Releases
   auth      Configure and authenticate with Reddit Ads
   config    Show local configuration
   business  List and select businesses
@@ -651,7 +653,7 @@ Commands:
 
 Examples:
   rad version
-  rad self-update --check
+  rad update --check
   rad auth setup --client-id <id> --client-secret <secret> --redirect-uri https://example.com/oauth/callback
   rad auth login
   rad auth complete --code <code>

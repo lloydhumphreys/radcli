@@ -35,7 +35,7 @@ env GOCACHE=$PWD/.gocache go build -o bin/rad ./cmd/rad
 ## 2. Save app credentials
 
 ```bash
-./bin/rad auth setup \
+rad auth setup \
   --client-id YOUR_CLIENT_ID \
   --client-secret YOUR_CLIENT_SECRET \
   --redirect-uri https://radcli.lloydhumphreys.com/callback \
@@ -50,7 +50,7 @@ env GOCACHE=$PWD/.gocache go build -o bin/rad ./cmd/rad
 ## 3. Start login
 
 ```bash
-./bin/rad auth login
+rad auth login
 ```
 
 This prints a Reddit authorization URL and then waits for you to paste either:
@@ -91,14 +91,14 @@ already done.
 If you want the older manual flow, this still works:
 
 ```bash
-./bin/rad auth complete --code YOUR_CODE
+rad auth complete --code YOUR_CODE
 ```
 
 ## 6. Verify access
 
 ```bash
-./bin/rad auth whoami
-./bin/rad business list
+rad auth whoami
+rad business list
 ```
 
 ## Troubleshooting
@@ -111,7 +111,7 @@ saved in the Reddit developer app.
 Check both:
 
 ```bash
-./bin/rad config show
+rad config show
 ```
 
 and the Redirect URL in the Reddit app settings.

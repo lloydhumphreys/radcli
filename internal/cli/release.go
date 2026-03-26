@@ -38,8 +38,8 @@ func (a *App) runVersion(args []string) error {
 	return err
 }
 
-func (a *App) runSelfUpdate(ctx context.Context, args []string) error {
-	fs := newFlagSet("self-update")
+func (a *App) runUpdate(ctx context.Context, args []string) error {
+	fs := newFlagSet("update")
 	version := fs.String("version", "", "")
 	repo := fs.String("repo", "", "")
 	check := fs.Bool("check", false, "")

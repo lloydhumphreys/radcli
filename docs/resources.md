@@ -19,12 +19,12 @@ For `get`, you can reference a resource by:
 Examples:
 
 ```bash
-./bin/rad campaign list
-./bin/rad campaign get 1234567890
-./bin/rad campaign get "Spring Launch"
+rad campaign list
+rad campaign get 1234567890
+rad campaign get "Spring Launch"
 
-./bin/rad adgroup get "Retargeting - US"
-./bin/rad ad get "Horseflaps Ad 1"
+rad adgroup get "Retargeting - US"
+rad ad get "Horseflaps Ad 1"
 ```
 
 If a name matches multiple resources, `radcli` will ask you to use the ID
@@ -33,10 +33,10 @@ instead.
 ## Campaigns
 
 ```bash
-./bin/rad campaign list
-./bin/rad campaign get <id-or-name>
-./bin/rad campaign create --name <name> --objective <objective> --configured-status <status>
-./bin/rad campaign update <id-or-name> [flags]
+rad campaign list
+rad campaign get <id-or-name>
+rad campaign create --name <name> --objective <objective> --configured-status <status>
+rad campaign update <id-or-name> [flags]
 ```
 
 Notes:
@@ -50,17 +50,17 @@ Notes:
 ## Ad Groups
 
 ```bash
-./bin/rad adgroup list
-./bin/rad adgroup get <id-or-name>
-./bin/rad adgroup create --campaign <id-or-name> --name <name> --configured-status <status>
-./bin/rad adgroup update <id-or-name> [flags]
+rad adgroup list
+rad adgroup get <id-or-name>
+rad adgroup create --campaign <id-or-name> --name <name> --configured-status <status>
+rad adgroup update <id-or-name> [flags]
 ```
 
 ## Ads
 
 ```bash
-./bin/rad ad list
-./bin/rad ad get <id-or-name>
+rad ad list
+rad ad get <id-or-name>
 ```
 
 ## Account Context
@@ -68,11 +68,11 @@ Notes:
 These commands use the selected ad account:
 
 ```bash
-./bin/rad account use <ad-account-id-or-name>
+rad account use <ad-account-id-or-name>
 ```
 
 You can override that per command:
 
 ```bash
-./bin/rad campaign get "Spring Launch" --account-id "horseflaps"
+rad campaign get "Spring Launch" --account-id "horseflaps"
 ```

@@ -6,15 +6,15 @@ and third-party audience lookup.
 ## Supported Commands
 
 ```bash
-./bin/rad audience saved list
-./bin/rad audience saved get <id-or-name>
-./bin/rad audience saved create --name <name> --type <type> --targeting-json <json-or-@file>
-./bin/rad audience saved update <id-or-name> [flags]
+rad audience saved list
+rad audience saved get <id-or-name>
+rad audience saved create --name <name> --type <type> --targeting-json <json-or-@file>
+rad audience saved update <id-or-name> [flags]
 
-./bin/rad audience custom list
-./bin/rad audience custom get <id-or-name>
+rad audience custom list
+rad audience custom get <id-or-name>
 
-./bin/rad audience third-party list
+rad audience third-party list
 ```
 
 ## Saved Audiences
@@ -22,14 +22,14 @@ and third-party audience lookup.
 List and inspect saved audiences:
 
 ```bash
-./bin/rad audience saved list
-./bin/rad audience saved get "US Retargeting Audience"
+rad audience saved list
+rad audience saved get "US Retargeting Audience"
 ```
 
 Create a saved audience from a targeting payload:
 
 ```bash
-./bin/rad audience saved create \
+rad audience saved create \
   --name "US Retargeting Audience" \
   --type RETARGETING \
   --targeting-json @targeting.json \
@@ -39,7 +39,7 @@ Create a saved audience from a targeting payload:
 Update a saved audience:
 
 ```bash
-./bin/rad audience saved update "US Retargeting Audience" \
+rad audience saved update "US Retargeting Audience" \
   --name "US Retargeting Audience v2" \
   --targeting-json @targeting.json \
   --dry-run
@@ -55,9 +55,9 @@ Notes:
 List and inspect custom audiences:
 
 ```bash
-./bin/rad audience custom list
-./bin/rad audience custom list --name purchasers
-./bin/rad audience custom get "Purchasers 180d"
+rad audience custom list
+rad audience custom list --name purchasers
+rad audience custom get "Purchasers 180d"
 ```
 
 The list view surfaces parsed cost fields when Reddit returns them.
@@ -67,7 +67,7 @@ The list view surfaces parsed cost fields when Reddit returns them.
 Lookup third-party audience segments available through Reddit:
 
 ```bash
-./bin/rad audience third-party list
+rad audience third-party list
 ```
 
 The table includes:

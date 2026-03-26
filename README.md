@@ -127,7 +127,8 @@ rad audience saved list
 
 Every command supports `--json` for machine-readable output. Reports also
 support `--csv`. Use `--dry-run` on any write command to preview the request
-body before sending it.
+body before sending it. Use `rad update` to install the latest published
+version in place.
 
 ## Docs
 
@@ -135,7 +136,6 @@ body before sending it.
 - [Command reference](./docs/commands.md)
 - [Authentication flow](./docs/login.md)
 - [Reports](./docs/reports.md)
-- [All docs](./docs/index.md)
 
 ## License
 

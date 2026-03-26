@@ -5,10 +5,10 @@
 ## Supported Commands
 
 ```bash
-./bin/rad campaign list
-./bin/rad campaign get <id-or-name>
-./bin/rad campaign create --name <name> --objective <objective> --configured-status <status>
-./bin/rad campaign update <id-or-name> [flags]
+rad campaign list
+rad campaign get <id-or-name>
+rad campaign create --name <name> --objective <objective> --configured-status <status>
+rad campaign update <id-or-name> [flags]
 ```
 
 ## Name Or ID
@@ -32,7 +32,7 @@ The minimum required fields are:
 Example:
 
 ```bash
-./bin/rad campaign create \
+rad campaign create \
   --name "Spring Launch" \
   --objective CLICKS \
   --configured-status PAUSED
@@ -43,8 +43,8 @@ Example:
 You can update a campaign by name or ID:
 
 ```bash
-./bin/rad campaign update "Spring Launch" --configured-status ACTIVE
-./bin/rad campaign update 123456789 --invoice-label "client-2026-q2"
+rad campaign update "Spring Launch" --configured-status ACTIVE
+rad campaign update 123456789 --invoice-label "client-2026-q2"
 ```
 
 ## Dry Runs
@@ -52,7 +52,7 @@ You can update a campaign by name or ID:
 Use `--dry-run` to inspect the JSON request body without sending it to Reddit:
 
 ```bash
-./bin/rad campaign create \
+rad campaign create \
   --name "Spring Launch" \
   --objective CLICKS \
   --configured-status PAUSED \
@@ -91,7 +91,7 @@ The first write cut supports:
 Example:
 
 ```bash
-./bin/rad campaign create \
+rad campaign create \
   --name "Spring Launch" \
   --objective CLICKS \
   --configured-status PAUSED \
