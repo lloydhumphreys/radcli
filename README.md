@@ -35,8 +35,9 @@ go build -o bin/rad ./cmd/rad
 
 ### 1. Create a Reddit Ads app
 
-Go to Business Manager and create a developer app. You'll need the client ID,
-client secret, and a redirect URI.
+Go to [Reddit Business Manager developer applications](https://ads.reddit.com/business/developer-applications)
+and create a developer app. You'll need the client ID, client secret, and a
+redirect URI.
 
 ### 2. Configure and log in
 
