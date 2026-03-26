@@ -1,155 +1,129 @@
 # radcli
 
-`radcli` is a command-line interface for Reddit Ads.
+A command-line interface for Reddit Ads. Fast, scriptable, no browser required.
 
-The goal is simple: make Reddit Ads fast, scriptable, and predictable without
-having to live in the website.
+## Install
 
-Today `radcli` is already useful for:
-
-- showing release metadata and self-updating from GitHub Releases
-- authenticating with Reddit Ads
-- selecting a default business and ad account
-- listing and inspecting campaigns, ad groups, and ads
-- creating and updating campaigns, ad groups, ads, and creatives
-- looking up targeting entities, funding instruments, pixels, and audiences
-- running raw reports
-- running enriched summary reports
-- filtering reports by campaign, ad group, and ad
-- exporting report output as tables, JSON, or CSV
-
-## Why
-
-The Reddit Ads web UI is powerful, but it can also be slow and hard to navigate
-for repeated operator tasks. `radcli` is meant to be a daily-driver tool for:
-
-- advertisers
-- agencies
-- internal growth teams
-- anyone who wants Reddit Ads to behave more like infrastructure
-
-## Build
-
-```bash
-git clone https://github.com/lloydhumphreys/radcli.git
-cd radcli
-env GOCACHE=$PWD/.gocache go build -o bin/rad ./cmd/rad
-```
-
-## Install And Update
-
-Release/distribution scaffolding is included for:
-
-- GitHub Releases
-- Homebrew tap publishing
-- `rad self-update`
-
-From a local checkout:
-
-```bash
-./bin/rad version
-./bin/rad self-update --check
-```
-
-Once releases are live, the intended Homebrew flow is:
+**Homebrew:**
 
 ```bash
 brew tap lloydhumphreys/radcli
 brew install --cask radcli
-brew upgrade --cask radcli
 ```
 
-## Quick Start
-
-1. Create a Reddit Ads developer app in Business Manager.
-2. Configure the CLI with your app credentials.
-3. Log in once.
-4. Pick a business and ad account.
-5. Start listing assets and running reports.
-
-For the full login flow and redirect URI notes, see [`docs/login.md`](./docs/login.md).
-
-Example:
+**From source:**
 
 ```bash
-./bin/rad auth setup \
+git clone https://github.com/lloydhumphreys/radcli.git
+cd radcli
+go build -o bin/rad ./cmd/rad
+```
+
+## Get started
+
+### 1. Create a Reddit Ads app
+
+Go to Business Manager and create a developer app. You'll need the client ID,
+client secret, and a redirect URI.
+
+### 2. Configure and log in
+
+```bash
+rad auth setup \
   --client-id YOUR_CLIENT_ID \
   --client-secret YOUR_CLIENT_SECRET \
-  --redirect-uri https://YOURDOMAIN.com/oauth/reddit-ads/callback \
-  --scope adsread \
-  --scope adsedit \
-  --scope adsconversions \
-  --scope history \
-  --scope read \
-  --user-agent 'macos:com.example.radcli:v0.1.0 (by /u/YOUR_USERNAME)'
+  --redirect-uri https://yourdomain.com/oauth/callback
 
-./bin/rad auth login
-./bin/rad auth whoami
-./bin/rad business list
-./bin/rad business use YOUR_BUSINESS_NAME
-./bin/rad account list
-./bin/rad account use YOUR_ACCOUNT_NAME
-./bin/rad campaign list
-./bin/rad report campaign-summary --since 30d
+rad auth login --open
 ```
 
-## Example Commands
+This opens Reddit in your browser. Approve the app and you'll be redirected to
+your redirect URI with a `code` parameter in the URL, e.g.:
+
+```
+https://yourdomain.com/oauth/callback?state=abc123&code=def456#_
+```
+
+Copy the entire URL from your browser's address bar and paste it back into the
+terminal. `rad` extracts the code automatically and exchanges it for an access
+token. You can also paste just the code value if you prefer.
+
+If the redirect URI doesn't resolve to a real server, that's fine — you only
+need the URL from the address bar, not for the page to load.
+
+### 3. Pick a business and ad account
 
 ```bash
-./bin/rad campaign get "Spring Launch"
-./bin/rad adgroup get "Retargeting"
-./bin/rad ad get "Winner Variant"
-
-./bin/rad campaign create --name "Spring Launch" --objective CLICKS --configured-status PAUSED --dry-run
-./bin/rad adgroup create --campaign "Spring Launch" --name "US Retargeting" --configured-status PAUSED --dry-run
-./bin/rad ad create --ad-group "US Retargeting" --name "Spring Ad" --configured-status PAUSED --dry-run
-
-./bin/rad report campaign-summary --since 30d
-./bin/rad report campaign-summary --campaign "Spring Launch" --since 30d
-./bin/rad report adgroup-summary --adgroup "Retargeting" --since 14d
-./bin/rad report ad-summary --ad "Winner Variant" --since 7d
-
-./bin/rad report campaign-summary --since 30d --csv --output campaign-summary-30d.csv
+rad business list
+rad business use "My Business"
+rad account list
+rad account use "My Ad Account"
 ```
+
+### 4. Start working
+
+```bash
+rad campaign list
+rad campaign get "Spring Launch"
+rad report campaign-summary --since 30d
+```
+
+## What can it do?
+
+**Browse and manage your ad structure:**
+
+```bash
+rad campaign list
+rad campaign create --name "Spring Launch" --objective CLICKS --configured-status PAUSED
+rad adgroup create --campaign "Spring Launch" --name "US Traffic" --configured-status PAUSED --dry-run
+rad ad create --ad-group "US Traffic" --name "Hero Ad" --configured-status ACTIVE --post-id t3_abc123
+rad ad update --configured-status PAUSED "Hero Ad"
+```
+
+**Run reports:**
+
+```bash
+rad report campaign-summary --since 30d
+rad report ad-summary --campaign "Spring Launch" --since 7d --csv --output report.csv
+rad report run --from 2026-03-01T00:00:00Z --to 2026-03-08T00:00:00Z --field IMPRESSIONS --field CLICKS
+```
+
+**Inspect creatives:**
+
+```bash
+rad post get t3_abc123
+rad post create --profile t2_xyz --type IMAGE --headline "My Ad" --content-json @content.json
+```
+
+**Find targeting options:**
+
+```bash
+rad targeting communities search --query "3d printing"
+rad targeting interests list
+rad targeting keywords suggest --keyword "filament"
+```
+
+**Check funding, pixels, and audiences:**
+
+```bash
+rad funding list
+rad pixel list
+rad pixel events "Main Pixel"
+rad audience saved list
+```
+
+Every command supports `--json` for machine-readable output. Reports also
+support `--csv`. Use `--dry-run` on any write command to preview the request
+body before sending it.
 
 ## Docs
 
-The deeper docs live in [`docs/`](./docs):
+- [Examples with output](./docs/examples.md)
+- [Command reference](./docs/commands.md)
+- [Authentication flow](./docs/login.md)
+- [Reports](./docs/reports.md)
+- [All docs](./docs/index.md)
 
-- [`docs/index.md`](./docs/index.md)
-- [`docs/commands.md`](./docs/commands.md)
-- [`docs/distribution.md`](./docs/distribution.md)
-- [`docs/login.md`](./docs/login.md)
-- [`docs/resources.md`](./docs/resources.md)
-- [`docs/reports.md`](./docs/reports.md)
-- [`plan.md`](./plan.md)
+## License
 
-## Current Scope
-
-Implemented command groups:
-
-- `auth`
-- `config`
-- `business`
-- `account`
-- `funding`
-- `pixel`
-- `audience`
-- `profile`
-- `post`
-- `campaign`
-- `adgroup`
-- `ad`
-- `targeting`
-- `report`
-- `version`
-- `self-update`
-
-## Next
-
-The next major milestone is workflow polish:
-
-- better validation and error messages around write commands
-- more end-to-end workflow docs and examples
-- richer export and automation ergonomics
-- wider live testing against real Reddit Ads setups
+[MIT](./LICENSE)
