@@ -86,6 +86,8 @@ func (a *App) Run(ctx context.Context, args []string) error {
 		return a.runAudienceCommand(ctx, args[1:])
 	case "profile":
 		return a.runProfileCommand(ctx, args[1:])
+	case "media":
+		return a.runMediaCommand(ctx, args[1:])
 	case "post":
 		return a.runPostCommand(ctx, args[1:])
 	case "campaign":
@@ -681,6 +683,7 @@ Commands:
   pixel     Look up pixels and event activity
   audience  Work with saved and custom audiences
   profile   Look up Reddit profiles
+  media     Upload images and videos for ad creatives
   post      Work with ad creatives/posts
   campaign  List campaigns
   adgroup   List ad groups
@@ -702,6 +705,7 @@ Examples:
   rad pixel list
   rad audience saved list
   rad profile list
+  rad media upload --file hero.jpg
   rad post create --profile <profile> --type IMAGE --headline <headline> --content-json @content.json --dry-run
   rad campaign list
   rad ad create --ad-group <ad-group> --name <name> --configured-status PAUSED --dry-run
