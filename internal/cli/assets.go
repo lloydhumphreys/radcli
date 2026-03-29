@@ -21,7 +21,7 @@ type assetDefinition struct {
 }
 
 func (a *App) runAssetCommand(ctx context.Context, def assetDefinition, args []string) error {
-	if len(args) == 0 || args[0] == "help" {
+	if len(args) == 0 || isHelpArg(args[0]) {
 		_, err := fmt.Fprintf(a.stdout, "Usage:\n  rad %s list [--account-id <id-or-name>] [--all] [--page-size N] [--json]\n  rad %s get <id-or-name> [--account-id <id-or-name>] [--json]\n", def.Command, def.Command)
 		return err
 	}

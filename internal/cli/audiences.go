@@ -26,7 +26,7 @@ var customAudienceDefinition = assetDefinition{
 }
 
 func (a *App) runAudienceCommand(ctx context.Context, args []string) error {
-	if len(args) == 0 || args[0] == "help" {
+	if len(args) == 0 || isHelpArg(args[0]) {
 		_, err := fmt.Fprintln(a.stdout, audienceHelp)
 		return err
 	}
@@ -44,7 +44,7 @@ func (a *App) runAudienceCommand(ctx context.Context, args []string) error {
 }
 
 func (a *App) runSavedAudienceCommand(ctx context.Context, args []string) error {
-	if len(args) == 0 || args[0] == "help" {
+	if len(args) == 0 || isHelpArg(args[0]) {
 		_, err := fmt.Fprintln(a.stdout, savedAudienceHelp)
 		return err
 	}
@@ -168,7 +168,7 @@ func (a *App) runSavedAudienceUpdateCommand(ctx context.Context, args []string) 
 }
 
 func (a *App) runCustomAudienceCommand(ctx context.Context, args []string) error {
-	if len(args) == 0 || args[0] == "help" {
+	if len(args) == 0 || isHelpArg(args[0]) {
 		_, err := fmt.Fprintln(a.stdout, customAudienceHelp)
 		return err
 	}
@@ -238,7 +238,7 @@ func (a *App) runCustomAudienceCommand(ctx context.Context, args []string) error
 }
 
 func (a *App) runThirdPartyAudienceCommand(ctx context.Context, args []string) error {
-	if len(args) == 0 || args[0] == "help" {
+	if len(args) == 0 || isHelpArg(args[0]) {
 		_, err := fmt.Fprintln(a.stdout, thirdPartyAudienceHelp)
 		return err
 	}

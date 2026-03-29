@@ -11,7 +11,7 @@ import (
 )
 
 func (a *App) runTargetingCommand(ctx context.Context, args []string) error {
-	if len(args) == 0 || args[0] == "help" {
+	if len(args) == 0 || isHelpArg(args[0]) {
 		_, err := fmt.Fprintln(a.stdout, targetingHelp)
 		return err
 	}
@@ -35,7 +35,7 @@ func (a *App) runTargetingCommand(ctx context.Context, args []string) error {
 }
 
 func (a *App) runTargetingCommunities(ctx context.Context, args []string) error {
-	if len(args) == 0 || args[0] == "help" {
+	if len(args) == 0 || isHelpArg(args[0]) {
 		_, err := fmt.Fprintln(a.stdout, targetingCommunitiesHelp)
 		return err
 	}
@@ -135,7 +135,7 @@ func (a *App) runTargetingCommunities(ctx context.Context, args []string) error 
 }
 
 func (a *App) runTargetingInterests(ctx context.Context, args []string) error {
-	if len(args) == 0 || args[0] == "help" {
+	if len(args) == 0 || isHelpArg(args[0]) {
 		_, err := fmt.Fprintln(a.stdout, targetingInterestsHelp)
 		return err
 	}
@@ -160,7 +160,7 @@ func (a *App) runTargetingInterests(ctx context.Context, args []string) error {
 }
 
 func (a *App) runTargetingGeolocations(ctx context.Context, args []string) error {
-	if len(args) == 0 || args[0] == "help" {
+	if len(args) == 0 || isHelpArg(args[0]) {
 		_, err := fmt.Fprintln(a.stdout, targetingGeolocationsHelp)
 		return err
 	}
@@ -202,7 +202,7 @@ func (a *App) runTargetingGeolocations(ctx context.Context, args []string) error
 }
 
 func (a *App) runTargetingDevices(ctx context.Context, args []string) error {
-	if len(args) == 0 || args[0] == "help" {
+	if len(args) == 0 || isHelpArg(args[0]) {
 		_, err := fmt.Fprintln(a.stdout, targetingDevicesHelp)
 		return err
 	}
@@ -234,7 +234,7 @@ func (a *App) runTargetingDevices(ctx context.Context, args []string) error {
 }
 
 func (a *App) runTargetingCarriers(ctx context.Context, args []string) error {
-	if len(args) == 0 || args[0] == "help" {
+	if len(args) == 0 || isHelpArg(args[0]) {
 		_, err := fmt.Fprintln(a.stdout, targetingCarriersHelp)
 		return err
 	}
@@ -266,7 +266,7 @@ func (a *App) runTargetingCarriers(ctx context.Context, args []string) error {
 }
 
 func (a *App) runTargetingKeywords(ctx context.Context, args []string) error {
-	if len(args) == 0 || args[0] == "help" {
+	if len(args) == 0 || isHelpArg(args[0]) {
 		_, err := fmt.Fprintln(a.stdout, targetingKeywordsHelp)
 		return err
 	}

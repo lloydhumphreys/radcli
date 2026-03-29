@@ -11,7 +11,7 @@ import (
 )
 
 func (a *App) runPostCommand(ctx context.Context, args []string) error {
-	if len(args) == 0 || args[0] == "help" {
+	if len(args) == 0 || isHelpArg(args[0]) {
 		_, err := fmt.Fprintln(a.stdout, postHelp)
 		return err
 	}

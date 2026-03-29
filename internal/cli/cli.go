@@ -508,6 +508,10 @@ func (a *App) resolveAccountSelection(ctx context.Context, businessID, input str
 	return "", "", fmt.Errorf("could not find ad account %q in the selected business. run `rad account list` and use the UUID from the `id` column", input)
 }
 
+func isHelpArg(arg string) bool {
+	return arg == "help" || arg == "--help" || arg == "-h"
+}
+
 func newFlagSet(name string) *flag.FlagSet {
 	fs := flag.NewFlagSet(name, flag.ContinueOnError)
 	fs.SetOutput(io.Discard)
