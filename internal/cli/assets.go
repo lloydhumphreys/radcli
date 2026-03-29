@@ -8,6 +8,8 @@ import (
 	"strings"
 
 	"github.com/lloydhumphreys/radcli/internal/output"
+	"golang.org/x/text/cases"
+	"golang.org/x/text/language"
 )
 
 type assetDefinition struct {
@@ -92,7 +94,7 @@ func (a *App) runAssetGetCommand(ctx context.Context, def assetDefinition, args 
 	}
 
 	if !*jsonOut {
-		if _, err := fmt.Fprintf(a.stdout, "%s %s (%s)\n\n", strings.Title(def.Label), name, id); err != nil {
+		if _, err := fmt.Fprintf(a.stdout, "%s %s (%s)\n\n", cases.Title(language.English).String(def.Label), name, id); err != nil {
 			return err
 		}
 	}
