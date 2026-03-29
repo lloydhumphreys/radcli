@@ -98,6 +98,8 @@ func (a *App) Run(ctx context.Context, args []string) error {
 		return a.runAdCommand(ctx, args[1:])
 	case "targeting":
 		return a.runTargetingCommand(ctx, args[1:])
+	case "timezone":
+		return a.runTimezoneCommand(ctx, args[1:])
 	case "report":
 		return a.runReportCommand(ctx, args[1:])
 	default:
@@ -689,6 +691,7 @@ Commands:
   adgroup   List ad groups
   ad        List ads
   targeting Look up targeting entities
+  timezone  Look up time zone IDs for reports
   report    Run reports
 
 Examples:
@@ -714,6 +717,7 @@ Examples:
   rad campaign update <id-or-name> --name <name>
   rad adgroup create --campaign <campaign> --name <name> --configured-status PAUSED --dry-run
   rad targeting communities search --query gaming
+  rad timezone list
   rad report campaign-summary --since 7d
   rad report run --from 2026-03-01T00:00:00Z --to 2026-03-08T00:00:00Z --field IMPRESSIONS --field CLICKS`
 

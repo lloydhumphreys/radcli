@@ -160,11 +160,13 @@ well.
 
 ## Time Zones
 
-The API defaults to UTC unless you pass `--time-zone-id`.
+The API defaults to UTC unless you pass `--time-zone-id`. Use `rad timezone list`
+to discover valid values.
 
 Example:
 
 ```bash
+rad timezone list
 rad report campaign-summary --since 7d --time-zone-id America/Los_Angeles
 ```
 
