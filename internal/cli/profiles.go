@@ -86,7 +86,7 @@ func (a *App) runProfileBusinessListCommand(ctx context.Context, args []string) 
 
 func (a *App) resolveProfileSelection(ctx context.Context, accountID, input string) (string, string, error) {
 	query := url.Values{}
-	query.Set("page.size", "1000")
+	query.Set("page.size", "100")
 
 	payload, err := a.api.RequestPaginatedJSON(ctx, "GET", "/ad_accounts/"+accountID+"/profiles", query, nil, true)
 	if err != nil {
