@@ -72,11 +72,30 @@ rad post create \
 
 Content items can include fields like:
 
-- `media_url`
+- `media_url` — a publicly accessible image or video URL (see below)
 - `destination_url`
 - `display_url`
 - `caption`
 - `call_to_action`
+
+## Media URLs
+
+The `media_url` field accepts any publicly accessible URL. Reddit will fetch and
+proxy the image at post creation time, so there is no separate upload step
+required.
+
+```bash
+rad post create \
+  --profile "brand_profile" \
+  --type IMAGE \
+  --headline "Spring Launch" \
+  --content-json '[{"media_url":"https://example.com/hero.jpg","destination_url":"https://example.com"}]'
+```
+
+The Reddit Ads API does not provide its own media upload endpoint. The core
+Reddit API (`oauth.reddit.com/api/media/asset.json`) does support uploads, but
+it requires the `submit` OAuth scope, which is not available to ads-only
+applications. Use a public URL instead.
 
 ## Updates
 

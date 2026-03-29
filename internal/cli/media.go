@@ -106,6 +106,15 @@ const mediaHelp = `Usage:
 Upload a local image or video file to Reddit and get back a hosted URL
 for use with 'rad post create --content-json'.
 
+NOTE: This command requires the 'submit' OAuth scope, which is not
+available to ads-only applications. If you get a 403 error, use a
+publicly accessible URL as the media_url instead:
+
+  rad post create --profile <profile> --type IMAGE --headline <headline> \
+    --content-json '[{"media_url":"https://example.com/image.jpg","destination_url":"https://example.com"}]'
+
+Reddit will fetch and proxy the image at post creation time.
+
 Examples:
   rad media upload --file hero.jpg
   rad media upload --file promo.mp4 --mime-type video/mp4
