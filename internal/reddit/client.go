@@ -332,7 +332,7 @@ func (c *Client) doRequestJSON(ctx context.Context, method, rawURL, authorizatio
 		if message := detailedErrorMessage(out); message != "" {
 			return nil, fmt.Errorf("api request failed (%d): %s", resp.StatusCode, message)
 		}
-		return nil, fmt.Errorf("api request failed (%d)", resp.StatusCode)
+		return nil, fmt.Errorf("api request failed (%d): %s", resp.StatusCode, truncate(string(payload), 500))
 	}
 
 	return out, nil
