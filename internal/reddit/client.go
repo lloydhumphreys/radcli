@@ -87,7 +87,8 @@ func (c *Client) ReportFields(ctx context.Context) ([]string, error) {
 	defer resp.Body.Close()
 
 	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
-		return nil, fmt.Errorf("could not fetch OpenAPI metadata (%d)", resp.StatusCode)
+		body, _ := io.ReadAll(resp.Body)
+		return nil, fmt.Errorf("could not fetch OpenAPI metadata (%d): %s", resp.StatusCode, truncate(string(body), 500))
 	}
 
 	var payload map[string]any

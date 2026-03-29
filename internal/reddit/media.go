@@ -62,6 +62,12 @@ func (c *Client) RequestMediaUploadLease(ctx context.Context, filename, mimeType
 	}
 
 	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
+		var parsed map[string]any
+		if json.Unmarshal(body, &parsed) == nil {
+			if message := detailedErrorMessage(parsed); message != "" {
+				return nil, fmt.Errorf("media lease request failed (%d): %s", resp.StatusCode, message)
+			}
+		}
 		return nil, fmt.Errorf("media lease request failed (%d): %s", resp.StatusCode, truncate(string(body), 500))
 	}
 
@@ -117,6 +123,9 @@ func (c *Client) UploadMediaToS3(ctx context.Context, lease *MediaUploadLease, f
 	}
 
 	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
+		if message := s3ErrorMessage(respBody); message != "" {
+			return "", fmt.Errorf("S3 upload failed (%d): %s", resp.StatusCode, message)
+		}
 		return "", fmt.Errorf("S3 upload failed (%d): %s", resp.StatusCode, truncate(string(respBody), 500))
 	}
 
@@ -197,6 +206,20 @@ func parseS3Location(body []byte) (string, error) {
 		return result.Location, nil // fallback to raw
 	}
 	return decoded, nil
+}
+
+func s3ErrorMessage(body []byte) string {
+	var s3Err struct {
+		Code    string `xml:"Code"`
+		Message string `xml:"Message"`
+	}
+	if xml.Unmarshal(body, &s3Err) != nil || s3Err.Message == "" {
+		return ""
+	}
+	if s3Err.Code != "" {
+		return s3Err.Code + ": " + s3Err.Message
+	}
+	return s3Err.Message
 }
 
 func truncate(s string, maxLen int) string {
