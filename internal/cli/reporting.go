@@ -159,7 +159,18 @@ func (a *App) runRawReport(ctx context.Context, args []string) error {
 		return err
 	}
 	rows := formatReportRows(rowsFromPayload(payload))
+	if !*all && reportHasMorePages(payload) {
+		fmt.Fprintf(a.stderr, "warning: showing the first page only (%d rows); pass --all for the complete report\n", len(rows))
+	}
 	return a.writeReportOutput(*outputPath, *jsonOut, *csvOut, payload, rows, nil)
+}
+
+// reportHasMorePages reports whether the API left a next_url behind, meaning
+// the payload holds only part of the report.
+func reportHasMorePages(payload map[string]any) bool {
+	pagination, _ := payload["pagination"].(map[string]any)
+	next, _ := pagination["next_url"].(string)
+	return next != ""
 }
 
 func (a *App) runPresetReport(ctx context.Context, preset reportPreset, args []string) error {
@@ -224,7 +235,11 @@ func (a *App) runPresetReport(ctx context.Context, preset reportPreset, args []s
 		data["time_zone_id"] = *timeZoneID
 	}
 
-	payload, err := a.requestReport(ctx, accountID, data, *pageSize, *all)
+	// Presets ask for the whole account and filter to the requested
+	// campaign/ad group/ad locally, so a single page would silently drop
+	// rows. Always fetch every page; --all is accepted but implied.
+	_ = *all
+	payload, err := a.requestReport(ctx, accountID, data, *pageSize, true)
 	if err != nil {
 		return err
 	}

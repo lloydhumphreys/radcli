@@ -747,6 +747,9 @@ const reportHelp = `Usage:
                  [--breakdown <BREAKDOWN> ...] [--account-id <id-or-name>] [--time-zone-id <tz>]
                  [--all] [--page-size N] [--json|--csv] [--output FILE]
 
-  rad report campaign-summary [--since 7d] [--daily] [--account-id <id-or-name>] [--campaign <id-or-name>] [--field FIELD] [--json|--csv] [--output FILE]
-  rad report adgroup-summary [--since 7d] [--daily] [--account-id <id-or-name>] [--campaign <id-or-name>] [--adgroup <id-or-name>] [--field FIELD] [--json|--csv] [--output FILE]
-  rad report ad-summary [--since 7d] [--daily] [--account-id <id-or-name>] [--campaign <id-or-name>] [--adgroup <id-or-name>] [--ad <id-or-name>] [--field FIELD] [--json|--csv] [--output FILE]`
+  rad report campaign-summary [--since 7d] [--daily] [--account-id <id-or-name>] [--campaign <id-or-name>] [--field FIELD] [--page-size N] [--json|--csv] [--output FILE]
+  rad report adgroup-summary [--since 7d] [--daily] [--account-id <id-or-name>] [--campaign <id-or-name>] [--adgroup <id-or-name>] [--field FIELD] [--page-size N] [--json|--csv] [--output FILE]
+  rad report ad-summary [--since 7d] [--daily] [--account-id <id-or-name>] [--campaign <id-or-name>] [--adgroup <id-or-name>] [--ad <id-or-name>] [--field FIELD] [--page-size N] [--json|--csv] [--output FILE]
+
+  The summary presets always fetch every page of the report before filtering.
+  "report run" returns the first page unless --all is passed, and warns when more pages exist.`
